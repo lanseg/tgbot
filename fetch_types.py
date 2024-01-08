@@ -9,6 +9,8 @@ from enum import Enum
 from html import parser
 from urllib import request
 
+# Whole sections that should be skipped because they contain no actionable
+# types or definitions or are not supported by the generator at the moment.
 SKIP_SECTIONS: set[str] = set(
     [
         "Recent changes",
@@ -26,7 +28,11 @@ SKIP_SECTIONS: set[str] = set(
     ]
 )
 
+SKIP_METHODS: set[str] = set(["sendMediaGroup"])
+
+# Mapping from some primitive type name to its go equivalent
 PRIMITIVE_TYPES: dict[str, str] = {
+    "byte": "byte",
     "Integer": "int64",
     "Float": "float32",
     "Float number": "float32",
@@ -37,6 +43,7 @@ PRIMITIVE_TYPES: dict[str, str] = {
     "Integer or String": "string",
 }
 
+# An aggregate type that can be one of the following
 ONEOF_TYPES: dict[str, str] = {
     "MessageOrigin": [
         "MessageOriginUser",
@@ -53,7 +60,7 @@ ONEOF_TYPES: dict[str, str] = {
 
 @dataclass
 class Param:
-    """ A parameter: struct field or method argument."""
+    """A parameter: struct field or method argument."""
 
     name: str
     typeName: str
@@ -63,7 +70,8 @@ class Param:
 
 @dataclass
 class Token:
-    """ A token: either struct or method definition."""
+    """A token: either struct or method definition."""
+
     name: str
     description: str
     params: list[Param]
@@ -132,7 +140,7 @@ class Parser(parser.HTMLParser):
 
         self.currentToken = None
         self.currentParam = None
-        self.description = ""
+        self.description = []
         self.table = []
         self.tableRow = []
         self.tableCell = ""
@@ -151,9 +159,11 @@ class Parser(parser.HTMLParser):
             and self.section not in SKIP_SECTIONS
             and self.subsection not in SKIP_SECTIONS
         ):
-            self.tokens.append(Token(self.subsection, self.description, self.table))
+            self.tokens.append(
+                Token(self.subsection, " ".join(self.description), self.table)
+            )
             self.subsection = ""
-            self.description = ""
+            self.description = []
             self.table = []
 
     def handle_endtag(self, tag):
@@ -179,15 +189,18 @@ class Parser(parser.HTMLParser):
         elif (
             oldstate == State.TABLE_ROW and self.state == State.TABLE and self.tableRow
         ):
-            if len(self.tableRow) == 3:
-                self.table.append(Param(self.tableRow[0], self.tableRow[1], "", self.tableRow[2]))
+            row = self.tableRow
+            if len(row) == 3:
+                self.table.append(Param(row[0], row[1], "", row[2]))
             elif len(self.tableRow) == 4:
-                self.table.append(Param(*self.tableRow))
+                self.table.append(Param(row[0], row[1], row[2], row[3]))
             self.tableRow = []
         elif oldstate == State.TABLE and self.state == State.DOCUMENT:
-            self.tokens.append(Token(self.subsection, self.description, self.table))
+            self.tokens.append(
+                Token(self.subsection, " ".join(self.description), self.table)
+            )
             self.subsection = ""
-            self.description = ""
+            self.description = []
             self.table = []
 
     def handle_data(self, data):
@@ -202,7 +215,7 @@ class Parser(parser.HTMLParser):
         if self.state == State.TABLE_CELL:
             self.tableCell += data
         elif self.state == State.DOCUMENT:
-            self.description += data.strip()
+            self.description.append(data.strip())
 
 
 def formatStruct(token: Token) -> str:
@@ -220,17 +233,74 @@ def formatStruct(token: Token) -> str:
     return "\n".join(result)
 
 
+def getResultType(token: Token, allTypes: dict[str, str]) -> list[str]:
+    maybeTypes = map(
+        lambda x: x.split(),
+        filter(
+            lambda x: x.find("is returned") != -1 or x.find("returns an ") != -1,
+            token.description.lower().split("."),
+        ),
+    )
+    return list(
+        {allTypes[t].name for mt in maybeTypes for t in mt if t in allTypes.keys()}
+    )
+
+
+def formatRequestResponse(token: Token, allTypes: dict[str, str]) -> str:
+    ret = getResultType(token, allTypes)
+    methodResult = [
+        Param("raw", "Array of byte", False, "Raw response from the server")
+    ]
+    if len(ret) == 1:
+        methodResult.append(
+            Param("result", ret[0], False, "Decoded response from the server")
+        )
+
+    return "\n".join(
+        [
+            formatStruct(
+                Token(
+                    token.name + "Request",
+                    f"Request for API call '{token.name}'",
+                    token.params,
+                )
+            ),
+            formatStruct(
+                Token(
+                    token.name + "Response",
+                    f"Response for API call '{token.name}'",
+                    methodResult,
+                )
+            ),
+        ]
+    )
+
+
+def formatMethod(token: Token) -> str:
+    methodName = toCamelCase(token.name)
+    return "\n".join(
+        [
+            formatComment(token.description, 2),
+            f"  {methodName}(request *{methodName}Request) (*{methodName}Response, error)",
+        ]
+    )
+
+
 if __name__ == "__main__":
-     with request.urlopen('https://core.telegram.org/bots/api') as response:
+    with request.urlopen("https://core.telegram.org/bots/api") as response:
+        data = response.read().decode("utf-8")
+        # with open("api") as data:
         parser = Parser()
-        parser.feed(response.read().decode('utf-8'))
+        parser.feed(data)
         tokenByName = {}
+        structNames = {}
 
         print("package telegram")
         for t in parser.tokens:
             tokenByName[t.name] = t
             if t.name[0].islower() or t.name in ONEOF_TYPES:
                 continue
+            structNames[t.name.lower()] = t
             print(formatStruct(t))
 
         print("// Oneof type fields are merged into one")
@@ -248,3 +318,19 @@ if __name__ == "__main__":
                     Token(k, f'Merged fields of {", ".join(names)}', fields.values())
                 )
             )
+
+        print("// Bot request and response types")
+        for t in parser.tokens:
+            if t.name[0].isupper() or t.name in SKIP_METHODS:
+                continue
+            print(formatRequestResponse(t, structNames))
+            print()
+
+        print("// Bot interface")
+        print("type Telegram interface {")
+        for t in parser.tokens:
+            if t.name[0].isupper() or t.name in SKIP_METHODS:
+                continue
+            print(formatMethod(t))
+            print()
+        print("}")
