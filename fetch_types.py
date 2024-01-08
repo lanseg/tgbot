@@ -241,10 +241,13 @@ def getResultType(token: Token, allTypes: dict[str, str]) -> list[str]:
             token.description.lower().split("."),
         ),
     )
-    return list(
-        {allTypes[t].name for mt in maybeTypes for t in mt if t in allTypes.keys()}
-    )
-
+    result =  []
+    for maybeType in {allTypes[t].name for mt in maybeTypes for t in mt if t in allTypes.keys()}:
+      if token.description.find(f"rray of {maybeType}") != -1:
+        result.append(f"Array of {maybeType}")
+      else:
+        result.append(maybeType)
+    return result
 
 def formatRequestResponse(token: Token, allTypes: dict[str, str]) -> str:
     ret = getResultType(token, allTypes)
