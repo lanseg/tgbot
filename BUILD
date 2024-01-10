@@ -6,6 +6,7 @@ exports_files(["fetch_types.py"])
 
 genrule(
     name = "telegram_types",
+    srcs = ["api"],
     outs = ["telegram_types.go"],
     cmd = "python $(location fetch_types.py) > \"$@\"",
     tools = ["fetch_types.py"],

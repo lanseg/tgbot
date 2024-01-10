@@ -1,10 +1,44 @@
 #!/usr/bin/env python3
-"""Generating golang telegram bot api from the API docs.
+"""Generating golang telegram bot from the parsed api.
 
 API definition taken from here: https://core.telegram.org/bots/api
 """
 
 import api_parser
+
+# Mapping from some primitive type name to its go equivalent
+PRIMITIVE_TYPES: dict[str, str] = {
+    "byte": "byte",
+    "int": "int",
+    "Integer": "int64",
+    "Float": "float32",
+    "Float number": "float32",
+    "String": "string",
+    "string": "string",
+    "Boolean": "bool",
+    "bool": "bool",
+    "True": "bool",
+    "true": "bool",
+    "False": "bool",
+    "false": "bool",
+    "error": "string",
+    "Integer or String": "string",
+}
+
+# An aggregate type that can be one of the following
+ONEOF_TYPES: dict[str, list[str]] = {
+    "MessageOrigin": [
+        "MessageOriginUser",
+        "MessageOriginHiddenUser",
+        "MessageOriginChat",
+        "MessageOriginChannel",
+    ],
+    "ReactionType": [
+        "ReactionTypeEmoji",
+        "ReactionTypeCustomEmoji",
+    ],
+}
+
 
 def formatWord(word: str) -> str:
     if word == "":
@@ -59,8 +93,8 @@ def formatType(tgType: str) -> str:
     if " or " in tgType:
         return "interface{}"
     maybeArray = tgType.split("Array of ")
-    tgType = api_parser.PRIMITIVE_TYPES.get(maybeArray[-1], toCamelCase(maybeArray[-1]))
-    if tgType not in api_parser.PRIMITIVE_TYPES.values():
+    tgType = PRIMITIVE_TYPES.get(maybeArray[-1], toCamelCase(maybeArray[-1]))
+    if tgType not in PRIMITIVE_TYPES.values():
         tgType = "*" + tgType
     return "[]" * (len(maybeArray) - 1) + tgType
 
@@ -124,3 +158,50 @@ def formatMethod(token: api_parser.Token) -> str:
             f"  {methodName}(request *{methodName}Request) (*{methodName}Response, error)",
         ]
     )
+
+
+def format(tokens: list[api_parser.Token]) -> str:
+    tokenByName = {}
+    structNames = {}
+    result = ["package telegram"]
+    for t in tokens:
+        tokenByName[t.name] = t
+        if t.name[0].islower() or t.name in ONEOF_TYPES:
+            continue
+        structNames[t.name.lower()] = t
+        result.append(formatStruct(t))
+
+    result.append("// Oneof type fields are merged into one")
+    for k, ts in ONEOF_TYPES.items():
+        names = []
+        fields = {}
+        for oneof in [tokenByName[t] for t in ts]:
+            names.append(oneof.name)
+            for param in oneof.params:
+                fields[param.name] = api_parser.Param(
+                    param.name, param.typeName, "", param.description
+                )
+        result.append(
+            formatStruct(
+                api_parser.Token(
+                    k, f'Merged fields of {", ".join(names)}', fields.values()
+                )
+            )
+        )
+
+    result.append("// Bot request and response types")
+    for t in tokens:
+        if t.name[0].isupper() or t.name in api_parser.SKIP_METHODS:
+            continue
+        result.append(formatRequestResponse(t, structNames))
+        result.append("")
+
+    result.append("// Bot interface")
+    result.append("type TelegramBot interface {")
+    for t in tokens:
+        if t.name[0].isupper() or t.name in api_parser.SKIP_METHODS:
+            continue
+        result.append(formatMethod(t))
+        result.append("")
+    result.append("}")
+    return "\n".join(result)

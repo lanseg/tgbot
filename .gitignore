@@ -22,3 +22,6 @@ go.work
 
 # Bazel workspace files
 bazel-*
+
+# Python files
+__pycache__/

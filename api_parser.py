@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generating golang telegram bot api from the API docs.
+"""Parser for the telegram bot api docs.
 
 API definition taken from here: https://core.telegram.org/bots/api
 """
@@ -28,39 +28,6 @@ SKIP_SECTIONS: set[str] = set(
 )
 
 SKIP_METHODS: set[str] = set(["sendMediaGroup"])
-
-# Mapping from some primitive type name to its go equivalent
-PRIMITIVE_TYPES: dict[str, str] = {
-    "byte": "byte",
-    "int": "int",
-    "Integer": "int64",
-    "Float": "float32",
-    "Float number": "float32",
-    "String": "string",
-    "string": "string",
-    "Boolean": "bool",
-    "bool": "bool",
-    "True": "bool",
-    "true": "bool",
-    "False": "bool",
-    "false": "bool",
-    "error": "string",
-    "Integer or String": "string",
-}
-
-# An aggregate type that can be one of the following
-ONEOF_TYPES: dict[str, list[str]] = {
-    "MessageOrigin": [
-        "MessageOriginUser",
-        "MessageOriginHiddenUser",
-        "MessageOriginChat",
-        "MessageOriginChannel",
-    ],
-    "ReactionType": [
-        "ReactionTypeEmoji",
-        "ReactionTypeCustomEmoji",
-    ],
-}
 
 # An override for some of the methods with an unclear return type
 RETURN_TYPES: dict[str, str] = {
@@ -92,6 +59,8 @@ class Token:
 
 
 class State(Enum):
+    """Which part of the html doc are we parsing now."""
+
     DOCUMENT = 1
     SECTION = 2
     SUBSECTION = 3
@@ -101,6 +70,8 @@ class State(Enum):
 
 
 class Parser(parser.HTMLParser):
+    """Parses Telegram's bot api doc into a set of tokens."""
+
     def __init__(self):
         super().__init__()
         self.tokens = []
@@ -108,8 +79,6 @@ class Parser(parser.HTMLParser):
         self.section = ""
         self.subsection = ""
 
-        self.currentToken = None
-        self.currentParam = None
         self.description = []
         self.table = []
         self.tableRow = []
