@@ -5,11 +5,12 @@ API definition taken from here: https://core.telegram.org/bots/api
 """
 
 import api_parser
+import sys
 from format import golang
 
 
 if __name__ == "__main__":
-    with open("api", encoding="utf-8") as api:
+    with open(sys.argv[1], encoding="utf-8") as api:
         docParser = api_parser.Parser()
         docParser.feed(api.read())
         print(golang.format(docParser.tokens))
