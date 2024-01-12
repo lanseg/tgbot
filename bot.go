@@ -1,4 +1,4 @@
-package telegram
+package tgbot
 
 import (
 	"bytes"
@@ -56,7 +56,7 @@ func getRequestValues[T any](request *T) map[string]string {
 
 func (b *TelegramBotImpl) queryApi(apiMethod string, params url.Values) ([]byte, error) {
 	resp, err := http.PostForm(fmt.Sprintf("https://api.telegram.org/bot%s/%s", b.token, apiMethod), params)
-    fmt.Println(params)
+	fmt.Println(params)
 	if err != nil {
 		return nil, err
 	}

@@ -163,7 +163,7 @@ def formatMethod(token: api_parser.Token) -> str:
 def format(tokens: list[api_parser.Token]) -> str:
     tokenByName = {}
     structNames = {}
-    result = ["package telegram"]
+    result = ["package tgbot"]
     for t in tokens:
         tokenByName[t.name] = t
         if t.name[0].islower() or t.name in ONEOF_TYPES:
