@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/url"
+	"reflect"
+	"strings"
 )
 
 type Response[T any] struct {
@@ -32,8 +34,29 @@ func NewBot(token string) TelegramBot {
 	}
 }
 
+func getRequestValues[T any](request *T) map[string]string {
+	result := map[string]string{}
+	elem := reflect.ValueOf(request).Elem()
+	typeDef := elem.Type()
+	for i := 0; i < typeDef.NumField(); i++ {
+		field := elem.Field(i)
+		name := typeDef.Field(i).Tag.Get("json")
+		if field.Kind() == reflect.Slice {
+			sliced := []string{}
+			for i := 0; i < field.Len(); i++ {
+				sliced = append(sliced, fmt.Sprintf("%v", field.Index(i)))
+			}
+			result[name] = strings.Join(sliced, ",")
+		} else {
+			result[name] = fmt.Sprintf("%v", field)
+		}
+	}
+	return result
+}
+
 func (b *TelegramBotImpl) queryApi(apiMethod string, params url.Values) ([]byte, error) {
 	resp, err := http.PostForm(fmt.Sprintf("https://api.telegram.org/bot%s/%s", b.token, apiMethod), params)
+    fmt.Println(params)
 	if err != nil {
 		return nil, err
 	}
@@ -66,13 +89,9 @@ func queryAndUnmarshal[T any](b *TelegramBotImpl, apiMethod string, params url.V
 
 func (b *TelegramBotImpl) GetUpdates(request *GetUpdatesRequest) (*GetUpdatesResponse, error) {
 	params := url.Values{}
-	params.Set("offset", fmt.Sprintf("%d", request.Offset))
-	params.Set("limit", fmt.Sprintf("%d", request.Limit))
-	params.Set("timeout", fmt.Sprintf("%d", request.Timeout))
-	for _, upd := range request.AllowedUpdates {
-		params.Add("allowed_updates", upd)
+	for k, v := range getRequestValues[GetUpdatesRequest](request) {
+		params.Set(k, v)
 	}
-
 	result, err := queryAndUnmarshal[[]*Update](b, "getUpdates", params)
 	if err != nil {
 		return nil, err
