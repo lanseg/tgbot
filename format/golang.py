@@ -197,7 +197,7 @@ def format(tokens: list[api_parser.Token]) -> str:
         result.append("")
 
     result.append("// Bot interface")
-    result.append("type TelegramBot interface {")
+    result.append("type TelegramBotU interface {")
     for t in tokens:
         if t.name[0].isupper() or t.name in api_parser.SKIP_METHODS:
             continue

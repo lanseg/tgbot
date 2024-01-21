@@ -12,29 +12,7 @@ import (
 	"strings"
 )
 
-type Response[T any] struct {
-	Ok          bool   `json:"ok"`
-	ErrorCode   int64  `json:"error_code"`
-	Description string `json:"description"`
-
-	Result T `json:"result"`
-}
-
-type TelegramBotImpl struct {
-	TelegramBot
-
-	httpClient *http.Client
-	token      string
-}
-
-func NewBot(token string) TelegramBot {
-	return &TelegramBotImpl{
-		token:      token,
-		httpClient: &http.Client{},
-	}
-}
-
-func getRequestValues[T any](request *T) map[string]string {
+func getRequestValues(request interface{}) map[string]string {
 	result := map[string]string{}
 	elem := reflect.ValueOf(request).Elem()
 	typeDef := elem.Type()
@@ -54,49 +32,75 @@ func getRequestValues[T any](request *T) map[string]string {
 	return result
 }
 
-func (b *TelegramBotImpl) queryApi(apiMethod string, params url.Values) ([]byte, error) {
+type Response[T any] struct {
+	Ok          bool   `json:"ok"`
+	ErrorCode   int64  `json:"error_code"`
+	Description string `json:"description"`
+
+	Result T `json:"result"`
+}
+
+type TelegramBot interface {
+	query(methodName string, params map[string]string) ([]byte, error)
+}
+
+type TelegramBotImpl struct {
+	TelegramBot
+
+	httpClient *http.Client
+	token      string
+}
+
+func NewBot(token string) *TelegramBotImpl {
+	return &TelegramBotImpl{
+		token:      token,
+		httpClient: &http.Client{},
+	}
+}
+
+func (b *TelegramBotImpl) query(apiMethod string, body map[string]string) ([]byte, error) {
+	params := url.Values{}
+	for k, v := range body {
+		params.Set(k, v)
+	}
+
 	resp, err := http.PostForm(fmt.Sprintf("https://api.telegram.org/bot%s/%s", b.token, apiMethod), params)
-	fmt.Println(params)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 
-	var buf bytes.Buffer
-	_, err = io.Copy(&buf, resp.Body)
-	if err != nil {
+	buf := &bytes.Buffer{}
+	if _, err = io.Copy(buf, resp.Body); err != nil {
 		return nil, err
 	}
 	return buf.Bytes(), nil
 }
 
-func queryAndUnmarshal[T any](b *TelegramBotImpl, apiMethod string, params url.Values) (T, error) {
-	var zero T
-	resultBytes, err := b.queryApi(apiMethod, params)
+func queryAndUnmarshal[T any](b TelegramBot, apiMethod string, request interface{}) (*Response[T], error) {
+	resultBytes, err := b.query(apiMethod, getRequestValues(request))
 	if err != nil {
-		return zero, err
+		return nil, err
 	}
-	response := &Response[T]{}
-	if err = json.Unmarshal(resultBytes, response); err != nil {
-		return zero, fmt.Errorf("Cannot unmarshal the response: %s", err)
+
+	result := &Response[T]{}
+	if err = json.Unmarshal(resultBytes, result); err != nil {
+		return nil, fmt.Errorf("Cannot unmarshal the response: %s", err)
 	}
-	if !response.Ok {
-		return zero, fmt.Errorf("Request \"%s\" completed with error %d: %s",
-			apiMethod, response.ErrorCode, response.Description)
+
+	if !result.Ok {
+		return nil, fmt.Errorf("Request \"%s\" completed with error %d: %s",
+			apiMethod, result.ErrorCode, result.Description)
 	}
-	return response.Result, nil
+	return result, nil
 }
 
 func (b *TelegramBotImpl) GetUpdates(request *GetUpdatesRequest) (*GetUpdatesResponse, error) {
-	params := url.Values{}
-	for k, v := range getRequestValues[GetUpdatesRequest](request) {
-		params.Set(k, v)
-	}
-	result, err := queryAndUnmarshal[[]*Update](b, "getUpdates", params)
+	apiResponse, err := queryAndUnmarshal[[]*Update](b, "getUpdates", request)
 	if err != nil {
 		return nil, err
 	}
 	return &GetUpdatesResponse{
-		Result: result,
+		Result: apiResponse.Result,
 	}, nil
 }

@@ -1,9 +1,11 @@
-package tgbot
+package main
 
 import (
 	"encoding/json"
 	"fmt"
 	"os"
+
+	"github.com/lanseg/tgbot"
 )
 
 func main() {
@@ -12,8 +14,8 @@ func main() {
 		os.Exit(1)
 	}
 	apiKey := os.Args[1]
-	bot := NewBot(apiKey)
-	result, err := bot.GetUpdates(&GetUpdatesRequest{})
+	bot := tgbot.NewBot(apiKey)
+	result, err := bot.GetUpdates(&tgbot.GetUpdatesRequest{})
 	if err != nil {
 		fmt.Printf("Could not perform request: %s\n", err)
 		os.Exit(1)
