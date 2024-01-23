@@ -13,8 +13,8 @@ genrule(
     name = "telegram_types",
     srcs = [":bot_api_docs"],
     outs = ["telegram_types.go"],
-    cmd = "python $(location fetch_types.py) $(location //:bot_api_docs) > \"$@\"",
-    tools = ["fetch_types.py"],
+    cmd = "python $(location scripts/fetch_types.py) $(location //:bot_api_docs) > \"$@\"",
+    tools = ["scripts/fetch_types.py"],
     visibility = ["//visibility:private"],
 )
 

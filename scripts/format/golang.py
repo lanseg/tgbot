@@ -4,6 +4,7 @@
 API definition taken from here: https://core.telegram.org/bots/api
 """
 
+import textwrap
 import api_parser
 
 # Mapping from some primitive type name to its go equivalent
@@ -41,6 +42,8 @@ ONEOF_TYPES: dict[str, list[str]] = {
 
 
 def formatWord(word: str) -> str:
+    """Format a word to fit a golang convention: first capital, known words to uppercase."""
+
     if word == "":
         return ""
     if word.lower() in ["id", "url", "ip"]:
@@ -49,6 +52,8 @@ def formatWord(word: str) -> str:
 
 
 def toCamelCase(usstr: str, capFirst: str = True) -> str:
+    """Converts snake case (underscores) word to camel case."""
+
     result = "".join(map(formatWord, usstr.split("_")))
     if not capFirst and result.upper() != result:
         return result[0].lower() + result[1:]
@@ -56,40 +61,35 @@ def toCamelCase(usstr: str, capFirst: str = True) -> str:
 
 
 def formatComment(comment: str, offset: int = 0, maxWidth: int = 95) -> str:
-    prefix = " " * offset + "// "
-    currentLines = list(reversed(comment.split("\n")))
-    commentLines = []
-
-    while currentLines:
-        line = currentLines.pop()
-        if len(line) <= maxWidth:
-            commentLines.append(line)
-            continue
-        splitAt = maxWidth
-        while splitAt >= 0 and not line[splitAt].isspace():
-            splitAt -= 1
-        commentLines.append(line[:splitAt].strip())
-        currentLines.append(line[splitAt:].strip())
-    return prefix + ("\n" + prefix).join(commentLines)
+    """Turns a text into a golang comment block with intendation and no word breaking."""
+    indent = " " * offset + "// "
+    return textwrap.fill(
+        comment.strip(), maxWidth, initial_indent=indent, subsequent_indent=indent
+    )
 
 
 def formatStruct(token: api_parser.Token) -> str:
-    result = [
-        formatComment(token.description, 0),
-        f"type {toCamelCase(token.name)} struct {{",
-    ]
-    for param in token.params:
-        result.append("")
-        result.append(formatComment(param.description, 2))
-        result.append(
-            f'  {toCamelCase(param.name)} {formatType(param.typeName)} `json:"{param.name}"`'
-        )
-    result.append("}\n")
+    """Formats token as a golang struct definition."""
 
-    return "\n".join(result)
+    result = []
+    for param in token.params:
+        result.extend(
+            [
+                formatComment(param.description, 2),
+                f'  {toCamelCase(param.name)} {formatType(param.typeName)} `json:"{param.name}"`\n',
+            ]
+        )
+
+    return "\n".join(
+        [formatComment(token.description), f"type {toCamelCase(token.name)} struct {{"]
+        + result
+        + ["}"]
+    )
 
 
 def formatType(tgType: str) -> str:
+    """Formats type name as a golang type definition, replacing unknown types with interface{}."""
+
     if " or " in tgType and tgType not in PRIMITIVE_TYPES:
         return "interface{}"
     maybeArray = tgType.split("Array of ")
@@ -100,6 +100,8 @@ def formatType(tgType: str) -> str:
 
 
 def getResultType(token: api_parser.Token, allTypes: dict[str, str]) -> list[str]:
+    """Tries to get information about the method result from a method description."""
+
     maybeTypes = map(
         lambda x: x.split(),
         filter(
@@ -119,6 +121,8 @@ def getResultType(token: api_parser.Token, allTypes: dict[str, str]) -> list[str
 
 
 def formatRequestResponse(token: api_parser.Token, allTypes: dict[str, str]) -> str:
+    """Generates request and response structs for the method token."""
+
     ret = getResultType(token, allTypes)
     methodResult = [
         api_parser.Param("raw", "Array of byte", False, "Raw response from the server")
@@ -151,55 +155,56 @@ def formatRequestResponse(token: api_parser.Token, allTypes: dict[str, str]) -> 
 
 
 def formatMethod(token: api_parser.Token, allTypes: dict[str, str]) -> str:
-    methodName = toCamelCase(token.name)
+    """Formats token as a golang method (member of a TelegramApi struct)."""
+    name = toCamelCase(token.name)
     maybeReturnType = getResultType(token, allTypes)
+    result = formatComment(token.description)
     if len(maybeReturnType) != 1:
-      return "\n".join(
-        [
-            formatComment(token.description),
-            f"func (a *TelegramApi) {methodName}(request *{methodName}Request) (*{methodName}Response, error) {{",
-            f"    _, err := queryAndUnmarshal[interface{{}}](a.bot, \"{methodName}\", request)",
-            "    if err != nil {",
-            "        return nil, err",
-            "    }",
-            f"    return &{methodName}Response {{ }}, nil",
-            "}"
-        ]
-    )
+        return result + textwrap.dedent(
+            f"""
+        func (a *TelegramApi) {name}(request *{name}Request) (*{name}Response, error) {{
+          _, err := queryAndUnmarshal[interface{{}}](a.bot, \"{name}\", request)
+          if err != nil {{
+              return nil, err
+          }}
+          return &{name}Response {{ }}, nil
+        }}"""
+        )
 
-    return "\n".join(
-        [
-            formatComment(token.description),
-            f"func (a *TelegramApi) {methodName}(request *{methodName}Request) (*{methodName}Response, error) {{",
-            f"    apiResponse, err := queryAndUnmarshal[{formatType(maybeReturnType[0])}](a.bot, \"{methodName}\", request)",
-            "    if err != nil {",
-            "        return nil, err",
-            "    }",
-            f"    return &{methodName}Response {{ Result: apiResponse.Result }}, nil",
-            "}"
-        ]
+    returnType = formatType(maybeReturnType[0])
+    return result + textwrap.dedent(
+        f"""
+          func (a *TelegramApi) {name}(request *{name}Request) (*{name}Response, error) {{
+              apiResponse, err := queryAndUnmarshal[{returnType}](a.bot, \"{name}\", request)
+              if err != nil {{
+                  return nil, err
+              }}
+              return &{name}Response {{ Result: apiResponse.Result }}, nil
+          }}"""
     )
 
 
-def format(tokens: list[api_parser.Token]) -> str:
+def formatTokens(tokens: list[api_parser.Token]) -> str:
+    """Formats all tokens (types, methods, etc) to a golang file."""
+
     tokenByName = {}
     structNames = {}
     result = [
-    "// Telegram bot API classes and enpoint",
-    "package tgbot",
+        "// Telegram bot API classes and enpoint",
+        "package tgbot",
     ]
-    for t in tokens:
-        tokenByName[t.name] = t
-        if t.name[0].islower() or t.name in ONEOF_TYPES:
+    for tok in tokens:
+        tokenByName[tok.name] = tok
+        if tok.name[0].islower() or tok.name in ONEOF_TYPES:
             continue
-        structNames[t.name.lower()] = t
-        result.append(formatStruct(t))
+        structNames[tok.name.lower()] = tok
+        result.append(formatStruct(tok))
 
     result.append("// Oneof type fields are merged into one")
-    for k, ts in ONEOF_TYPES.items():
+    for typeName, memberTypes in ONEOF_TYPES.items():
         names = []
         fields = {}
-        for oneof in [tokenByName[t] for t in ts]:
+        for oneof in [tokenByName[memberType] for memberType in memberTypes]:
             names.append(oneof.name)
             for param in oneof.params:
                 fields[param.name] = api_parser.Param(
@@ -208,30 +213,31 @@ def format(tokens: list[api_parser.Token]) -> str:
         result.append(
             formatStruct(
                 api_parser.Token(
-                    k, f'Merged fields of {", ".join(names)}', fields.values()
+                    typeName, f'Merged fields of {", ".join(names)}', fields.values()
                 )
             )
         )
 
     result.append("// Bot request and response types")
-    for t in tokens:
-        if t.name[0].isupper() or t.name in api_parser.SKIP_METHODS:
+    for tok in tokens:
+        if tok.name[0].isupper() or tok.name in api_parser.SKIP_METHODS:
             continue
-        result.append(formatRequestResponse(t, structNames))
+        result.append(formatRequestResponse(tok, structNames))
         result.append("")
 
-    result.append("// Bot interface")
-    result.append("type TelegramApi struct {")
-    result.append("  bot TelegramBot")
-    result.append("}")
-    result.append("")
-    result.append("func NewTelegramApi (bot TelegramBot) *TelegramApi {")
-    result.append("    return &TelegramApi { bot: bot }")
-    result.append("}")
-    result.append("")
-    for t in tokens:
-        if t.name[0].isupper() or t.name in api_parser.SKIP_METHODS:
+    result.append(textwrap.dedent("""
+      // Bot interface
+      type TelegramApi struct {
+        bot TelegramBot
+      }
+      
+      func NewTelegramApi (bot TelegramBot) *TelegramApi {
+          return &TelegramApi { bot: bot }
+      }
+      """))
+    for tok in tokens:
+        if tok.name[0].isupper() or tok.name in api_parser.SKIP_METHODS:
             continue
-        result.append(formatMethod(t, structNames))
+        result.append(formatMethod(tok, structNames))
         result.append("")
     return "\n".join(result)
