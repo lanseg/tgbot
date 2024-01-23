@@ -1,3 +1,4 @@
+// Telegram bot API classes and enpoint
 package tgbot
 
 // Telegram Bot API                      Twitter   Home  FAQ  Apps  API  Protocol  Schema
@@ -735,7 +736,7 @@ type ReplyParameters struct {
 
 	// Optional. If the message to be replied to is from a different chat, unique identifier for the
 	// chat or username of the channel (in the format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Optional. Pass True if the message should be sent even if the specified message to be replied
 	// to is not found; can be used only for replies in the same chat and forum topic.
@@ -2364,7 +2365,7 @@ type BotCommandScopeChat struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Represents the scope of bot commands, covering all administrators of a specific group or
@@ -2376,7 +2377,7 @@ type BotCommandScopeChatAdministrators struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Represents the scope of bot commands, covering a specific member of a group or supergroup
@@ -2388,7 +2389,7 @@ type BotCommandScopeChatMember struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target user
 	UserID int64 `json:"user_id"`
@@ -4613,7 +4614,7 @@ type SendMessageRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -4661,7 +4662,7 @@ type ForwardMessageRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -4669,7 +4670,7 @@ type ForwardMessageRequest struct {
 
 	// Unique identifier for the chat where the original message was sent (or channel username in the
 	// format @channelusername)
-	FromChatID interface{} `json:"from_chat_id"`
+	FromChatID string `json:"from_chat_id"`
 
 	// Sends the message silently. Users will receive a notification with no sound.
 	DisableNotification bool `json:"disable_notification"`
@@ -4696,7 +4697,7 @@ type ForwardMessagesRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -4704,7 +4705,7 @@ type ForwardMessagesRequest struct {
 
 	// Unique identifier for the chat where the original messages were sent (or channel username in
 	// the format @channelusername)
-	FromChatID interface{} `json:"from_chat_id"`
+	FromChatID string `json:"from_chat_id"`
 
 	// Identifiers of 1-100 messages in the chat from_chat_id to forward. The identifiers must be
 	// specified in a strictly increasing order.
@@ -4732,7 +4733,7 @@ type CopyMessageRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -4740,7 +4741,7 @@ type CopyMessageRequest struct {
 
 	// Unique identifier for the chat where the original message was sent (or channel username in the
 	// format @channelusername)
-	FromChatID interface{} `json:"from_chat_id"`
+	FromChatID string `json:"from_chat_id"`
 
 	// Message identifier in the chat specified in from_chat_id
 	MessageID int64 `json:"message_id"`
@@ -4782,7 +4783,7 @@ type CopyMessagesRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -4790,7 +4791,7 @@ type CopyMessagesRequest struct {
 
 	// Unique identifier for the chat where the original messages were sent (or channel username in
 	// the format @channelusername)
-	FromChatID interface{} `json:"from_chat_id"`
+	FromChatID string `json:"from_chat_id"`
 
 	// Identifiers of 1-100 messages in the chat from_chat_id to copy. The identifiers must be
 	// specified in a strictly increasing order.
@@ -4821,7 +4822,7 @@ type SendPhotoRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -4877,7 +4878,7 @@ type SendAudioRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -4944,7 +4945,7 @@ type SendDocumentRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -5007,7 +5008,7 @@ type SendVideoRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -5081,7 +5082,7 @@ type SendAnimationRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -5153,7 +5154,7 @@ type SendVoiceRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -5207,7 +5208,7 @@ type SendVideoNoteRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -5261,7 +5262,7 @@ type SendLocationRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -5317,7 +5318,7 @@ type SendVenueRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -5377,7 +5378,7 @@ type SendContactRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -5424,7 +5425,7 @@ type SendPollRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -5499,7 +5500,7 @@ type SendDiceRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -5539,7 +5540,7 @@ type SendChatActionRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread; supergroups only
 	MessageThreadID int64 `json:"message_thread_id"`
@@ -5564,7 +5565,7 @@ type SetMessageReactionRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Identifier of the target message. If the message belongs to a media group, the reaction is set
 	// to the first non-deleted message in the group instead.
@@ -5629,7 +5630,7 @@ type BanChatMemberRequest struct {
 
 	// Unique identifier for the target group or username of the target supergroup or channel (in the
 	// format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target user
 	UserID int64 `json:"user_id"`
@@ -5657,7 +5658,7 @@ type UnbanChatMemberRequest struct {
 
 	// Unique identifier for the target group or username of the target supergroup or channel (in the
 	// format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target user
 	UserID int64 `json:"user_id"`
@@ -5678,7 +5679,7 @@ type RestrictChatMemberRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target user
 	UserID int64 `json:"user_id"`
@@ -5711,7 +5712,7 @@ type PromoteChatMemberRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target user
 	UserID int64 `json:"user_id"`
@@ -5782,7 +5783,7 @@ type SetChatAdministratorCustomTitleRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target user
 	UserID int64 `json:"user_id"`
@@ -5803,7 +5804,7 @@ type BanChatSenderChatRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target sender chat
 	SenderChatID int64 `json:"sender_chat_id"`
@@ -5821,7 +5822,7 @@ type UnbanChatSenderChatRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target sender chat
 	SenderChatID int64 `json:"sender_chat_id"`
@@ -5839,7 +5840,7 @@ type SetChatPermissionsRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// A JSON-serialized object for new default chat permissions
 	Permissions *ChatPermissions `json:"permissions"`
@@ -5864,7 +5865,7 @@ type ExportChatInviteLinkRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'exportChatInviteLink'
@@ -5879,7 +5880,7 @@ type CreateChatInviteLinkRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Invite link name; 0-32 characters
 	Name string `json:"name"`
@@ -5908,7 +5909,7 @@ type EditChatInviteLinkRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// The invite link to edit
 	InviteLink string `json:"invite_link"`
@@ -5940,7 +5941,7 @@ type RevokeChatInviteLinkRequest struct {
 
 	// Unique identifier of the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// The invite link to revoke
 	InviteLink string `json:"invite_link"`
@@ -5958,7 +5959,7 @@ type ApproveChatJoinRequestRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target user
 	UserID int64 `json:"user_id"`
@@ -5976,7 +5977,7 @@ type DeclineChatJoinRequestRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target user
 	UserID int64 `json:"user_id"`
@@ -5994,7 +5995,7 @@ type SetChatPhotoRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// New chat photo, uploaded using multipart/form-data
 	Photo *InputFile `json:"photo"`
@@ -6012,7 +6013,7 @@ type DeleteChatPhotoRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'deleteChatPhoto'
@@ -6027,7 +6028,7 @@ type SetChatTitleRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// New chat title, 1-128 characters
 	Title string `json:"title"`
@@ -6045,7 +6046,7 @@ type SetChatDescriptionRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// New chat description, 0-255 characters
 	Description string `json:"description"`
@@ -6063,7 +6064,7 @@ type PinChatMessageRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Identifier of a message to pin
 	MessageID int64 `json:"message_id"`
@@ -6085,7 +6086,7 @@ type UnpinChatMessageRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Identifier of a message to unpin. If not specified, the most recent pinned message (by sending
 	// date) will be unpinned.
@@ -6104,7 +6105,7 @@ type UnpinAllChatMessagesRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'unpinAllChatMessages'
@@ -6119,7 +6120,7 @@ type LeaveChatRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup or channel (in the
 	// format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'leaveChat'
@@ -6134,7 +6135,7 @@ type GetChatRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup or channel (in the
 	// format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'getChat'
@@ -6149,7 +6150,7 @@ type GetChatAdministratorsRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup or channel (in the
 	// format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'getChatAdministrators'
@@ -6167,7 +6168,7 @@ type GetChatMemberCountRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup or channel (in the
 	// format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'getChatMemberCount'
@@ -6182,7 +6183,7 @@ type GetChatMemberRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup or channel (in the
 	// format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target user
 	UserID int64 `json:"user_id"`
@@ -6200,7 +6201,7 @@ type SetChatStickerSetRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Name of the sticker set to be set as the group sticker set
 	StickerSetName string `json:"sticker_set_name"`
@@ -6218,7 +6219,7 @@ type DeleteChatStickerSetRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'deleteChatStickerSet'
@@ -6247,7 +6248,7 @@ type CreateForumTopicRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Topic name, 1-128 characters
 	Name string `json:"name"`
@@ -6274,7 +6275,7 @@ type EditForumTopicRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread of the forum topic
 	MessageThreadID int64 `json:"message_thread_id"`
@@ -6301,7 +6302,7 @@ type CloseForumTopicRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread of the forum topic
 	MessageThreadID int64 `json:"message_thread_id"`
@@ -6319,7 +6320,7 @@ type ReopenForumTopicRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread of the forum topic
 	MessageThreadID int64 `json:"message_thread_id"`
@@ -6337,7 +6338,7 @@ type DeleteForumTopicRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread of the forum topic
 	MessageThreadID int64 `json:"message_thread_id"`
@@ -6355,7 +6356,7 @@ type UnpinAllForumTopicMessagesRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread of the forum topic
 	MessageThreadID int64 `json:"message_thread_id"`
@@ -6373,7 +6374,7 @@ type EditGeneralForumTopicRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// New topic name, 1-128 characters
 	Name string `json:"name"`
@@ -6391,7 +6392,7 @@ type CloseGeneralForumTopicRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'closeGeneralForumTopic'
@@ -6406,7 +6407,7 @@ type ReopenGeneralForumTopicRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'reopenGeneralForumTopic'
@@ -6421,7 +6422,7 @@ type HideGeneralForumTopicRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'hideGeneralForumTopic'
@@ -6436,7 +6437,7 @@ type UnhideGeneralForumTopicRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'unhideGeneralForumTopic'
@@ -6451,7 +6452,7 @@ type UnpinAllGeneralForumTopicMessagesRequest struct {
 
 	// Unique identifier for the target chat or username of the target supergroup (in the format
 	// @supergroupusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 }
 
 // Response for API call 'unpinAllGeneralForumTopicMessages'
@@ -6496,7 +6497,7 @@ type AnswerCallbackQueryResponse struct {
 type GetUserChatBoostsRequest struct {
 
 	// Unique identifier for the chat or username of the channel (in the format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier of the target user
 	UserID int64 `json:"user_id"`
@@ -6742,7 +6743,7 @@ type EditMessageTextRequest struct {
 
 	// Required if inline_message_id is not specified. Unique identifier for the target chat or
 	// username of the target channel (in the format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Required if inline_message_id is not specified. Identifier of the message to edit
 	MessageID int64 `json:"message_id"`
@@ -6782,7 +6783,7 @@ type EditMessageCaptionRequest struct {
 
 	// Required if inline_message_id is not specified. Unique identifier for the target chat or
 	// username of the target channel (in the format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Required if inline_message_id is not specified. Identifier of the message to edit
 	MessageID int64 `json:"message_id"`
@@ -6819,7 +6820,7 @@ type EditMessageMediaRequest struct {
 
 	// Required if inline_message_id is not specified. Unique identifier for the target chat or
 	// username of the target channel (in the format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Required if inline_message_id is not specified. Identifier of the message to edit
 	MessageID int64 `json:"message_id"`
@@ -6849,7 +6850,7 @@ type EditMessageLiveLocationRequest struct {
 
 	// Required if inline_message_id is not specified. Unique identifier for the target chat or
 	// username of the target channel (in the format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Required if inline_message_id is not specified. Identifier of the message to edit
 	MessageID int64 `json:"message_id"`
@@ -6892,7 +6893,7 @@ type StopMessageLiveLocationRequest struct {
 
 	// Required if inline_message_id is not specified. Unique identifier for the target chat or
 	// username of the target channel (in the format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Required if inline_message_id is not specified. Identifier of the message with live location to
 	// stop
@@ -6920,7 +6921,7 @@ type EditMessageReplyMarkupRequest struct {
 
 	// Required if inline_message_id is not specified. Unique identifier for the target chat or
 	// username of the target channel (in the format @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Required if inline_message_id is not specified. Identifier of the message to edit
 	MessageID int64 `json:"message_id"`
@@ -6947,7 +6948,7 @@ type StopPollRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Identifier of the original message with the poll
 	MessageID int64 `json:"message_id"`
@@ -6971,7 +6972,7 @@ type DeleteMessageRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Identifier of the message to delete
 	MessageID int64 `json:"message_id"`
@@ -6989,7 +6990,7 @@ type DeleteMessagesRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Identifiers of 1-100 messages to delete. See deleteMessage for limitations on which messages
 	// can be deleted
@@ -7008,7 +7009,7 @@ type SendStickerRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -7383,7 +7384,7 @@ type SendInvoiceRequest struct {
 
 	// Unique identifier for the target chat or username of the target channel (in the format
 	// @channelusername)
-	ChatID interface{} `json:"chat_id"`
+	ChatID string `json:"chat_id"`
 
 	// Unique identifier for the target message thread (topic) of the forum; for forum supergroups
 	// only
@@ -7736,623 +7737,1336 @@ type GetGameHighScoresResponse struct {
 }
 
 // Bot interface
-type TelegramBot interface {
-	// Use this method to receive incoming updates using long polling ( wiki ). Returns an Array of
-	// Update objects.
-	GetUpdates(request *GetUpdatesRequest) (*GetUpdatesResponse, error)
-
-	// Notes 1. This method will not work if an outgoing webhook is set up. 2. In order to avoid
-	// getting duplicate updates, recalculate offset after each server response.    Use this method to
-	// specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update
-	// for the bot, we will send an HTTPS POST request to the specified URL, containing a
-	// JSON-serialized Update . In case of an unsuccessful request, we will give up after a reasonable
-	// amount of attempts. Returns True on success.  If you'd like to make sure that the webhook was
-	// set by you, you can specify secret data in the parameter secret_token . If specified, the
-	// request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as
-	// content.
-	SetWebhook(request *SetWebhookRequest) (*SetWebhookResponse, error)
-
-	// Notes 1. You will not be able to receive updates using getUpdates for as long as an outgoing
-	// webhook is set up. 2. To use a self-signed certificate, you need to upload your public key
-	// certificate using certificate parameter. Please upload as InputFile, sending a String will not
-	// work. 3. Ports currently supported for webhooks : 443, 80, 88, 8443 .  If you're having any
-	// trouble setting up webhooks, please check out this amazing guide to webhooks .    Use this
-	// method to remove webhook integration if you decide to switch back to getUpdates . Returns True
-	// on success.
-	DeleteWebhook(request *DeleteWebhookRequest) (*DeleteWebhookResponse, error)
-
-	// Use this method to get current webhook status. Requires no parameters. On success, returns a
-	// WebhookInfo object. If the bot is using getUpdates , will return an object with the url field
-	// empty.
-	GetWebhookInfo(request *GetWebhookInfoRequest) (*GetWebhookInfoResponse, error)
-
-	// A simple method for testing your bot's authentication token. Requires no parameters. Returns
-	// basic information about the bot in form of a User object.
-	GetMe(request *GetMeRequest) (*GetMeResponse, error)
-
-	// Use this method to log out from the cloud Bot API server before launching the bot locally. You
-	// must log out the bot before running it locally, otherwise there is no guarantee that the bot
-	// will receive updates. After a successful call, you can immediately log in on a local server,
-	// but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on
-	// success. Requires no parameters.
-	LogOut(request *LogOutRequest) (*LogOutResponse, error)
-
-	// Use this method to close the bot instance before moving it from one local server to another.
-	// You need to delete the webhook before calling this method to ensure that the bot isn't launched
-	// again after server restart. The method will return error 429 in the first 10 minutes after the
-	// bot is launched. Returns True on success. Requires no parameters.
-	Close(request *CloseRequest) (*CloseResponse, error)
-
-	//  Use this method to send text messages. On success, the sent Message is returned.
-	SendMessage(request *SendMessageRequest) (*SendMessageResponse, error)
-
-	// Use this method to forward messages of any kind. Service messages and messages with protected
-	// content can't be forwarded. On success, the sent Message is returned.
-	ForwardMessage(request *ForwardMessageRequest) (*ForwardMessageResponse, error)
-
-	// Use this method to forward multiple messages of any kind. If some of the specified messages
-	// can't be found or forwarded, they are skipped. Service messages and messages with protected
-	// content can't be forwarded. Album grouping is kept for forwarded messages. On success, an array
-	// of MessageId of the sent messages is returned.
-	ForwardMessages(request *ForwardMessagesRequest) (*ForwardMessagesResponse, error)
-
-	// Use this method to copy messages of any kind. Service messages, giveaway messages, giveaway
-	// winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the
-	// value of the field correct_option_id is known to the bot. The method is analogous to the method
-	// forwardMessage , but the copied message doesn't have a link to the original message. Returns
-	// the MessageId of the sent message on success.
-	CopyMessage(request *CopyMessageRequest) (*CopyMessageResponse, error)
-
-	// Use this method to copy messages of any kind. If some of the specified messages can't be
-	// found or copied, they are skipped. Service messages, giveaway messages, giveaway winners
-	// messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of
-	// the field correct_option_id is known to the bot. The method is analogous to the method
-	// forwardMessages , but the copied messages don't have a link to the original message. Album
-	// grouping is kept for copied messages. On success, an array of MessageId of the sent messages is
-	// returned.
-	CopyMessages(request *CopyMessagesRequest) (*CopyMessagesResponse, error)
-
-	//   Use this method to send photos. On success, the sent Message is returned.
-	SendPhoto(request *SendPhotoRequest) (*SendPhotoResponse, error)
-
-	// Use this method to send audio files, if you want Telegram clients to display them in the
-	// music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is
-	// returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed
-	// in the future.  For sending voice messages, use the sendVoice method instead.
-	SendAudio(request *SendAudioRequest) (*SendAudioResponse, error)
-
-	// Use this method to send general files. On success, the sent Message is returned. Bots can
-	// currently send files of any type of up to 50 MB in size, this limit may be changed in the
-	// future.
-	SendDocument(request *SendDocumentRequest) (*SendDocumentResponse, error)
-
-	// Use this method to send video files, Telegram clients support MPEG4 videos (other formats may
-	// be sent as Document ). On success, the sent Message is returned. Bots can currently send video
-	// files of up to 50 MB in size, this limit may be changed in the future.
-	SendVideo(request *SendVideoRequest) (*SendVideoResponse, error)
-
-	// Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On
-	// success, the sent Message is returned. Bots can currently send animation files of up to 50 MB
-	// in size, this limit may be changed in the future.
-	SendAnimation(request *SendAnimationRequest) (*SendAnimationResponse, error)
-
-	// Use this method to send audio files, if you want Telegram clients to display the file as a
-	// playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS
-	// (other formats may be sent as Audio or Document ). On success, the sent Message is returned.
-	// Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the
-	// future.
-	SendVoice(request *SendVoiceRequest) (*SendVoiceResponse, error)
-
-	// As of v.4.0 , Telegram clients support rounded square MPEG4 videos of up to 1 minute long.
-	// Use this method to send video messages. On success, the sent Message is returned.
-	SendVideoNote(request *SendVideoNoteRequest) (*SendVideoNoteResponse, error)
-
-	//   Use this method to send point on the map. On success, the sent Message is returned.
-	SendLocation(request *SendLocationRequest) (*SendLocationResponse, error)
-
-	//   Use this method to send information about a venue. On success, the sent Message is returned.
-	SendVenue(request *SendVenueRequest) (*SendVenueResponse, error)
-
-	//   Use this method to send phone contacts. On success, the sent Message is returned.
-	SendContact(request *SendContactRequest) (*SendContactResponse, error)
-
-	//   Use this method to send a native poll. On success, the sent Message is returned.
-	SendPoll(request *SendPollRequest) (*SendPollResponse, error)
-
-	// Use this method to send an animated emoji that will display a random value. On success, the
-	// sent Message is returned.
-	SendDice(request *SendDiceRequest) (*SendDiceResponse, error)
-
-	// Use this method when you need to tell the user that something is happening on the bot's side.
-	// The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients
-	// clear its typing status). Returns True on success.   Example: The ImageBot needs some time to
-	// process a request and upload the image. Instead of sending a text message along the lines of
-	// “Retrieving image, please wait…”, the bot may use sendChatAction with action = upload_photo .
-	// The user will see a “sending photo” status for the bot.   We only recommend using this method
-	// when a response from the bot will take a noticeable amount of time to arrive.
-	SendChatAction(request *SendChatActionRequest) (*SendChatActionResponse, error)
-
-	// Use this method to change the chosen reactions on a message. Service messages can't be
-	// reacted to. Automatically forwarded messages from a channel to its discussion group have the
-	// same available reactions as messages in the channel. Returns True on success.
-	SetMessageReaction(request *SetMessageReactionRequest) (*SetMessageReactionResponse, error)
-
-	// Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos
-	// object.
-	GetUserProfilePhotos(request *GetUserProfilePhotosRequest) (*GetUserProfilePhotosResponse, error)
-
-	// Use this method to get basic information about a file and prepare it for downloading. For the
-	// moment, bots can download files of up to 20MB in size. On success, a File object is returned.
-	// The file can then be downloaded via the link
-	// https://api.telegram.org/file/bot<token>/<file_path> , where <file_path> is taken from the
-	// response. It is guaranteed that the link will be valid for at least 1 hour. When the link
-	// expires, a new one can be requested by calling getFile again.
-	GetFile(request *GetFileRequest) (*GetFileResponse, error)
-
-	// Note: This function may not preserve the original file name and MIME type. You should save the
-	// file's MIME type and name (if available) when the File object is received.   Use this method to
-	// ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the
-	// user will not be able to return to the chat on their own using invite links, etc., unless
-	// unbanned first. The bot must be an administrator in the chat for this to work and must have the
-	// appropriate administrator rights. Returns True on success.
-	BanChatMember(request *BanChatMemberRequest) (*BanChatMemberResponse, error)
-
-	// Use this method to unban a previously banned user in a supergroup or channel. The user will
-	// not return to the group or channel automatically, but will be able to join via link, etc. The
-	// bot must be an administrator for this to work. By default, this method guarantees that after
-	// the call the user is not a member of the chat, but will be able to join it. So if the user is a
-	// member of the chat they will also be removed from the chat. If you don't want this, use the
-	// parameter only_if_banned . Returns True on success.
-	UnbanChatMember(request *UnbanChatMemberRequest) (*UnbanChatMemberResponse, error)
-
-	// Use this method to restrict a user in a supergroup. The bot must be an administrator in the
-	// supergroup for this to work and must have the appropriate administrator rights. Pass True for
-	// all permissions to lift restrictions from a user. Returns True on success.
-	RestrictChatMember(request *RestrictChatMemberRequest) (*RestrictChatMemberResponse, error)
-
-	// Use this method to promote or demote a user in a supergroup or a channel. The bot must be an
-	// administrator in the chat for this to work and must have the appropriate administrator rights.
-	// Pass False for all boolean parameters to demote a user. Returns True on success.
-	PromoteChatMember(request *PromoteChatMemberRequest) (*PromoteChatMemberResponse, error)
-
-	// Use this method to set a custom title for an administrator in a supergroup promoted by the
-	// bot. Returns True on success.
-	SetChatAdministratorCustomTitle(request *SetChatAdministratorCustomTitleRequest) (*SetChatAdministratorCustomTitleResponse, error)
-
-	// Use this method to ban a channel chat in a supergroup or a channel. Until the chat is
-	// unbanned , the owner of the banned chat won't be able to send messages on behalf of any of
-	// their channels . The bot must be an administrator in the supergroup or channel for this to work
-	// and must have the appropriate administrator rights. Returns True on success.
-	BanChatSenderChat(request *BanChatSenderChatRequest) (*BanChatSenderChatResponse, error)
-
-	// Use this method to unban a previously banned channel chat in a supergroup or channel. The bot
-	// must be an administrator for this to work and must have the appropriate administrator rights.
-	// Returns True on success.
-	UnbanChatSenderChat(request *UnbanChatSenderChatRequest) (*UnbanChatSenderChatResponse, error)
-
-	// Use this method to set default chat permissions for all members. The bot must be an
-	// administrator in the group or a supergroup for this to work and must have the
-	// can_restrict_members administrator rights. Returns True on success.
-	SetChatPermissions(request *SetChatPermissionsRequest) (*SetChatPermissionsResponse, error)
-
-	// Use this method to generate a new primary invite link for a chat; any previously generated
-	// primary link is revoked. The bot must be an administrator in the chat for this to work and must
-	// have the appropriate administrator rights. Returns the new invite link as String on success.
-	ExportChatInviteLink(request *ExportChatInviteLinkRequest) (*ExportChatInviteLinkResponse, error)
-
-	// Note: Each administrator in a chat generates their own invite links. Bots can't use invite
-	// links generated by other administrators. If you want your bot to work with invite links, it
-	// will need to generate its own link using exportChatInviteLink or by calling the getChat method.
-	// If your bot needs to generate a new primary invite link replacing its previous one, use
-	// exportChatInviteLink again.    Use this method to create an additional invite link for a chat.
-	// The bot must be an administrator in the chat for this to work and must have the appropriate
-	// administrator rights. The link can be revoked using the method revokeChatInviteLink . Returns
-	// the new invite link as ChatInviteLink object.
-	CreateChatInviteLink(request *CreateChatInviteLinkRequest) (*CreateChatInviteLinkResponse, error)
-
-	// Use this method to edit a non-primary invite link created by the bot. The bot must be an
-	// administrator in the chat for this to work and must have the appropriate administrator rights.
-	// Returns the edited invite link as a ChatInviteLink object.
-	EditChatInviteLink(request *EditChatInviteLinkRequest) (*EditChatInviteLinkResponse, error)
-
-	// Use this method to revoke an invite link created by the bot. If the primary link is revoked,
-	// a new link is automatically generated. The bot must be an administrator in the chat for this to
-	// work and must have the appropriate administrator rights. Returns the revoked invite link as
-	// ChatInviteLink object.
-	RevokeChatInviteLink(request *RevokeChatInviteLinkRequest) (*RevokeChatInviteLinkResponse, error)
-
-	// Use this method to approve a chat join request. The bot must be an administrator in the chat
-	// for this to work and must have the can_invite_users administrator right. Returns True on
-	// success.
-	ApproveChatJoinRequest(request *ApproveChatJoinRequestRequest) (*ApproveChatJoinRequestResponse, error)
-
-	// Use this method to decline a chat join request. The bot must be an administrator in the chat
-	// for this to work and must have the can_invite_users administrator right. Returns True on
-	// success.
-	DeclineChatJoinRequest(request *DeclineChatJoinRequestRequest) (*DeclineChatJoinRequestResponse, error)
-
-	// Use this method to set a new profile photo for the chat. Photos can't be changed for private
-	// chats. The bot must be an administrator in the chat for this to work and must have the
-	// appropriate administrator rights. Returns True on success.
-	SetChatPhoto(request *SetChatPhotoRequest) (*SetChatPhotoResponse, error)
-
-	// Use this method to delete a chat photo. Photos can't be changed for private chats. The bot
-	// must be an administrator in the chat for this to work and must have the appropriate
-	// administrator rights. Returns True on success.
-	DeleteChatPhoto(request *DeleteChatPhotoRequest) (*DeleteChatPhotoResponse, error)
-
-	// Use this method to change the title of a chat. Titles can't be changed for private chats. The
-	// bot must be an administrator in the chat for this to work and must have the appropriate
-	// administrator rights. Returns True on success.
-	SetChatTitle(request *SetChatTitleRequest) (*SetChatTitleResponse, error)
-
-	// Use this method to change the description of a group, a supergroup or a channel. The bot must
-	// be an administrator in the chat for this to work and must have the appropriate administrator
-	// rights. Returns True on success.
-	SetChatDescription(request *SetChatDescriptionRequest) (*SetChatDescriptionResponse, error)
-
-	// Use this method to add a message to the list of pinned messages in a chat. If the chat is not
-	// a private chat, the bot must be an administrator in the chat for this to work and must have the
-	// 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator
-	// right in a channel. Returns True on success.
-	PinChatMessage(request *PinChatMessageRequest) (*PinChatMessageResponse, error)
-
-	// Use this method to remove a message from the list of pinned messages in a chat. If the chat
-	// is not a private chat, the bot must be an administrator in the chat for this to work and must
-	// have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages'
-	// administrator right in a channel. Returns True on success.
-	UnpinChatMessage(request *UnpinChatMessageRequest) (*UnpinChatMessageResponse, error)
-
-	// Use this method to clear the list of pinned messages in a chat. If the chat is not a private
-	// chat, the bot must be an administrator in the chat for this to work and must have the
-	// 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator
-	// right in a channel. Returns True on success.
-	UnpinAllChatMessages(request *UnpinAllChatMessagesRequest) (*UnpinAllChatMessagesResponse, error)
-
-	// Use this method for your bot to leave a group, supergroup or channel. Returns True on
-	// success.
-	LeaveChat(request *LeaveChatRequest) (*LeaveChatResponse, error)
-
-	// Use this method to get up to date information about the chat. Returns a Chat object on
-	// success.
-	GetChat(request *GetChatRequest) (*GetChatResponse, error)
-
-	// Use this method to get a list of administrators in a chat, which aren't bots. Returns an
-	// Array of ChatMember objects.
-	GetChatAdministrators(request *GetChatAdministratorsRequest) (*GetChatAdministratorsResponse, error)
-
-	//   Use this method to get the number of members in a chat. Returns Int on success.
-	GetChatMemberCount(request *GetChatMemberCountRequest) (*GetChatMemberCountResponse, error)
-
-	// Use this method to get information about a member of a chat. The method is only guaranteed to
-	// work for other users if the bot is an administrator in the chat. Returns a ChatMember object on
-	// success.
-	GetChatMember(request *GetChatMemberRequest) (*GetChatMemberResponse, error)
-
-	// Use this method to set a new group sticker set for a supergroup. The bot must be an
-	// administrator in the chat for this to work and must have the appropriate administrator rights.
-	// Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot
-	// can use this method. Returns True on success.
-	SetChatStickerSet(request *SetChatStickerSetRequest) (*SetChatStickerSetResponse, error)
-
-	// Use this method to delete a group sticker set from a supergroup. The bot must be an
-	// administrator in the chat for this to work and must have the appropriate administrator rights.
-	// Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot
-	// can use this method. Returns True on success.
-	DeleteChatStickerSet(request *DeleteChatStickerSetRequest) (*DeleteChatStickerSetResponse, error)
-
-	// Use this method to get custom emoji stickers, which can be used as a forum topic icon by any
-	// user. Requires no parameters. Returns an Array of Sticker objects.
-	GetForumTopicIconStickers(request *GetForumTopicIconStickersRequest) (*GetForumTopicIconStickersResponse, error)
-
-	// Use this method to create a topic in a forum supergroup chat. The bot must be an administrator
-	// in the chat for this to work and must have the can_manage_topics administrator rights. Returns
-	// information about the created topic as a ForumTopic object.
-	CreateForumTopic(request *CreateForumTopicRequest) (*CreateForumTopicResponse, error)
-
-	// Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be
-	// an administrator in the chat for this to work and must have can_manage_topics administrator
-	// rights, unless it is the creator of the topic. Returns True on success.
-	EditForumTopic(request *EditForumTopicRequest) (*EditForumTopicResponse, error)
-
-	// Use this method to close an open topic in a forum supergroup chat. The bot must be an
-	// administrator in the chat for this to work and must have the can_manage_topics administrator
-	// rights, unless it is the creator of the topic. Returns True on success.
-	CloseForumTopic(request *CloseForumTopicRequest) (*CloseForumTopicResponse, error)
-
-	// Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an
-	// administrator in the chat for this to work and must have the can_manage_topics administrator
-	// rights, unless it is the creator of the topic. Returns True on success.
-	ReopenForumTopic(request *ReopenForumTopicRequest) (*ReopenForumTopicResponse, error)
-
-	// Use this method to delete a forum topic along with all its messages in a forum supergroup
-	// chat. The bot must be an administrator in the chat for this to work and must have the
-	// can_delete_messages administrator rights. Returns True on success.
-	DeleteForumTopic(request *DeleteForumTopicRequest) (*DeleteForumTopicResponse, error)
-
-	// Use this method to clear the list of pinned messages in a forum topic. The bot must be an
-	// administrator in the chat for this to work and must have the can_pin_messages administrator
-	// right in the supergroup. Returns True on success.
-	UnpinAllForumTopicMessages(request *UnpinAllForumTopicMessagesRequest) (*UnpinAllForumTopicMessagesResponse, error)
-
-	// Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot
-	// must be an administrator in the chat for this to work and must have can_manage_topics
-	// administrator rights. Returns True on success.
-	EditGeneralForumTopic(request *EditGeneralForumTopicRequest) (*EditGeneralForumTopicResponse, error)
-
-	// Use this method to close an open 'General' topic in a forum supergroup chat. The bot must be
-	// an administrator in the chat for this to work and must have the can_manage_topics administrator
-	// rights. Returns True on success.
-	CloseGeneralForumTopic(request *CloseGeneralForumTopicRequest) (*CloseGeneralForumTopicResponse, error)
-
-	// Use this method to reopen a closed 'General' topic in a forum supergroup chat. The bot must
-	// be an administrator in the chat for this to work and must have the can_manage_topics
-	// administrator rights. The topic will be automatically unhidden if it was hidden. Returns True
-	// on success.
-	ReopenGeneralForumTopic(request *ReopenGeneralForumTopicRequest) (*ReopenGeneralForumTopicResponse, error)
-
-	// Use this method to hide the 'General' topic in a forum supergroup chat. The bot must be an
-	// administrator in the chat for this to work and must have the can_manage_topics administrator
-	// rights. The topic will be automatically closed if it was open. Returns True on success.
-	HideGeneralForumTopic(request *HideGeneralForumTopicRequest) (*HideGeneralForumTopicResponse, error)
-
-	// Use this method to unhide the 'General' topic in a forum supergroup chat. The bot must be an
-	// administrator in the chat for this to work and must have the can_manage_topics administrator
-	// rights. Returns True on success.
-	UnhideGeneralForumTopic(request *UnhideGeneralForumTopicRequest) (*UnhideGeneralForumTopicResponse, error)
-
-	// Use this method to clear the list of pinned messages in a General forum topic. The bot must
-	// be an administrator in the chat for this to work and must have the can_pin_messages
-	// administrator right in the supergroup. Returns True on success.
-	UnpinAllGeneralForumTopicMessages(request *UnpinAllGeneralForumTopicMessagesRequest) (*UnpinAllGeneralForumTopicMessagesResponse, error)
-
-	// Use this method to send answers to callback queries sent from inline keyboards . The answer
-	// will be displayed to the user as a notification at the top of the chat screen or as an alert.
-	// On success, True is returned.   Alternatively, the user can be redirected to the specified Game
-	// URL. For this option to work, you must first create a game for your bot via @BotFather and
-	// accept the terms. Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot
-	// with a parameter.
-	AnswerCallbackQuery(request *AnswerCallbackQueryRequest) (*AnswerCallbackQueryResponse, error)
-
-	// Use this method to get the list of boosts added to a chat by a user. Requires administrator
-	// rights in the chat. Returns a UserChatBoosts object.
-	GetUserChatBoosts(request *GetUserChatBoostsRequest) (*GetUserChatBoostsResponse, error)
-
-	// Use this method to change the list of the bot's commands. See this manual for more details
-	// about bot commands. Returns True on success.
-	SetMyCommands(request *SetMyCommandsRequest) (*SetMyCommandsResponse, error)
-
-	// Use this method to delete the list of the bot's commands for the given scope and user
-	// language. After deletion, higher level commands will be shown to affected users. Returns True
-	// on success.
-	DeleteMyCommands(request *DeleteMyCommandsRequest) (*DeleteMyCommandsResponse, error)
-
-	// Use this method to get the current list of the bot's commands for the given scope and user
-	// language. Returns an Array of BotCommand objects. If commands aren't set, an empty list is
-	// returned.
-	GetMyCommands(request *GetMyCommandsRequest) (*GetMyCommandsResponse, error)
-
-	//   Use this method to change the bot's name. Returns True on success.
-	SetMyName(request *SetMyNameRequest) (*SetMyNameResponse, error)
-
-	// Use this method to get the current bot name for the given user language. Returns BotName on
-	// success.
-	GetMyName(request *GetMyNameRequest) (*GetMyNameResponse, error)
-
-	// Use this method to change the bot's description, which is shown in the chat with the bot if
-	// the chat is empty. Returns True on success.
-	SetMyDescription(request *SetMyDescriptionRequest) (*SetMyDescriptionResponse, error)
-
-	// Use this method to get the current bot description for the given user language. Returns
-	// BotDescription on success.
-	GetMyDescription(request *GetMyDescriptionRequest) (*GetMyDescriptionResponse, error)
-
-	// Use this method to change the bot's short description, which is shown on the bot's profile
-	// page and is sent together with the link when users share the bot. Returns True on success.
-	SetMyShortDescription(request *SetMyShortDescriptionRequest) (*SetMyShortDescriptionResponse, error)
-
-	// Use this method to get the current bot short description for the given user language. Returns
-	// BotShortDescription on success.
-	GetMyShortDescription(request *GetMyShortDescriptionRequest) (*GetMyShortDescriptionResponse, error)
-
-	// Use this method to change the bot's menu button in a private chat, or the default menu
-	// button. Returns True on success.
-	SetChatMenuButton(request *SetChatMenuButtonRequest) (*SetChatMenuButtonResponse, error)
-
-	// Use this method to get the current value of the bot's menu button in a private chat, or the
-	// default menu button. Returns MenuButton on success.
-	GetChatMenuButton(request *GetChatMenuButtonRequest) (*GetChatMenuButtonResponse, error)
-
-	// Use this method to change the default administrator rights requested by the bot when it's
-	// added as an administrator to groups or channels. These rights will be suggested to users, but
-	// they are free to modify the list before adding the bot. Returns True on success.
-	SetMyDefaultAdministratorRights(request *SetMyDefaultAdministratorRightsRequest) (*SetMyDefaultAdministratorRightsResponse, error)
-
-	// Use this method to get the current default administrator rights of the bot. Returns
-	// ChatAdministratorRights on success.
-	GetMyDefaultAdministratorRights(request *GetMyDefaultAdministratorRightsRequest) (*GetMyDefaultAdministratorRightsResponse, error)
-
-	// Use this method to edit text and game messages. On success, if the edited message is not an
-	// inline message, the edited Message is returned, otherwise True is returned.
-	EditMessageText(request *EditMessageTextRequest) (*EditMessageTextResponse, error)
-
-	// Use this method to edit captions of messages. On success, if the edited message is not an
-	// inline message, the edited Message is returned, otherwise True is returned.
-	EditMessageCaption(request *EditMessageCaptionRequest) (*EditMessageCaptionResponse, error)
-
-	// Use this method to edit animation, audio, document, photo, or video messages. If a message is
-	// part of a message album, then it can be edited only to an audio for audio albums, only to a
-	// document for document albums and to a photo or a video otherwise. When an inline message is
-	// edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify
-	// a URL. On success, if the edited message is not an inline message, the edited Message is
-	// returned, otherwise True is returned.
-	EditMessageMedia(request *EditMessageMediaRequest) (*EditMessageMediaResponse, error)
-
-	// Use this method to edit live location messages. A location can be edited until its
-	// live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation . On
-	// success, if the edited message is not an inline message, the edited Message is returned,
-	// otherwise True is returned.
-	EditMessageLiveLocation(request *EditMessageLiveLocationRequest) (*EditMessageLiveLocationResponse, error)
-
-	// Use this method to stop updating a live location message before live_period expires. On
-	// success, if the message is not an inline message, the edited Message is returned, otherwise
-	// True is returned.
-	StopMessageLiveLocation(request *StopMessageLiveLocationRequest) (*StopMessageLiveLocationResponse, error)
-
-	// Use this method to edit only the reply markup of messages. On success, if the edited message
-	// is not an inline message, the edited Message is returned, otherwise True is returned.
-	EditMessageReplyMarkup(request *EditMessageReplyMarkupRequest) (*EditMessageReplyMarkupResponse, error)
-
-	// Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is
-	// returned.
-	StopPoll(request *StopPollRequest) (*StopPollResponse, error)
-
-	// Use this method to delete a message, including service messages, with the following
-	// limitations: - A message can only be deleted if it was sent less than 48 hours ago. - Service
-	// messages about a supergroup, channel, or forum topic creation can't be deleted. - A dice
-	// message in a private chat can only be deleted if it was sent more than 24 hours ago. - Bots can
-	// delete outgoing messages in private chats, groups, and supergroups. - Bots can delete incoming
-	// messages in private chats. - Bots granted can_post_messages permissions can delete outgoing
-	// messages in channels. - If the bot is an administrator of a group, it can delete any message
-	// there. - If the bot has can_delete_messages permission in a supergroup or a channel, it can
-	// delete any message there. Returns True on success.
-	DeleteMessage(request *DeleteMessageRequest) (*DeleteMessageResponse, error)
-
-	// Use this method to delete multiple messages simultaneously. If some of the specified messages
-	// can't be found, they are skipped. Returns True on success.
-	DeleteMessages(request *DeleteMessagesRequest) (*DeleteMessagesResponse, error)
-
-	// Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the
-	// sent Message is returned.
-	SendSticker(request *SendStickerRequest) (*SendStickerResponse, error)
-
-	//   Use this method to get a sticker set. On success, a StickerSet object is returned.
-	GetStickerSet(request *GetStickerSetRequest) (*GetStickerSetResponse, error)
-
-	// Use this method to get information about custom emoji stickers by their identifiers. Returns
-	// an Array of Sticker objects.
-	GetCustomEmojiStickers(request *GetCustomEmojiStickersRequest) (*GetCustomEmojiStickersResponse, error)
-
-	// Use this method to upload a file with a sticker for later use in the createNewStickerSet and
-	// addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on
-	// success.
-	UploadStickerFile(request *UploadStickerFileRequest) (*UploadStickerFileResponse, error)
-
-	// Use this method to create a new sticker set owned by a user. The bot will be able to edit the
-	// sticker set thus created. Returns True on success.
-	CreateNewStickerSet(request *CreateNewStickerSetRequest) (*CreateNewStickerSetResponse, error)
-
-	// Use this method to add a new sticker to a set created by the bot. The format of the added
-	// sticker must match the format of the other stickers in the set. Emoji sticker sets can have up
-	// to 200 stickers. Animated and video sticker sets can have up to 50 stickers. Static sticker
-	// sets can have up to 120 stickers. Returns True on success.
-	AddStickerToSet(request *AddStickerToSetRequest) (*AddStickerToSetResponse, error)
-
-	// Use this method to move a sticker in a set created by the bot to a specific position. Returns
-	// True on success.
-	SetStickerPositionInSet(request *SetStickerPositionInSetRequest) (*SetStickerPositionInSetResponse, error)
-
-	//   Use this method to delete a sticker from a set created by the bot. Returns True on success.
-	DeleteStickerFromSet(request *DeleteStickerFromSetRequest) (*DeleteStickerFromSetResponse, error)
-
-	// Use this method to change the list of emoji assigned to a regular or custom emoji sticker.
-	// The sticker must belong to a sticker set created by the bot. Returns True on success.
-	SetStickerEmojiList(request *SetStickerEmojiListRequest) (*SetStickerEmojiListResponse, error)
-
-	// Use this method to change search keywords assigned to a regular or custom emoji sticker. The
-	// sticker must belong to a sticker set created by the bot. Returns True on success.
-	SetStickerKeywords(request *SetStickerKeywordsRequest) (*SetStickerKeywordsResponse, error)
-
-	// Use this method to change the mask position of a mask sticker. The sticker must belong to a
-	// sticker set that was created by the bot. Returns True on success.
-	SetStickerMaskPosition(request *SetStickerMaskPositionRequest) (*SetStickerMaskPositionResponse, error)
-
-	//   Use this method to set the title of a created sticker set. Returns True on success.
-	SetStickerSetTitle(request *SetStickerSetTitleRequest) (*SetStickerSetTitleResponse, error)
-
-	// Use this method to set the thumbnail of a regular or mask sticker set. The format of the
-	// thumbnail file must match the format of the stickers in the set. Returns True on success.
-	SetStickerSetThumbnail(request *SetStickerSetThumbnailRequest) (*SetStickerSetThumbnailResponse, error)
-
-	//   Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success.
-	SetCustomEmojiStickerSetThumbnail(request *SetCustomEmojiStickerSetThumbnailRequest) (*SetCustomEmojiStickerSetThumbnailResponse, error)
-
-	// Use this method to delete a sticker set that was created by the bot. Returns True on success.
-	//
-	DeleteStickerSet(request *DeleteStickerSetRequest) (*DeleteStickerSetResponse, error)
-
-	// Use this method to send answers to an inline query. On success, True is returned. No more
-	// than 50 results per query are allowed.
-	AnswerInlineQuery(request *AnswerInlineQueryRequest) (*AnswerInlineQueryResponse, error)
-
-	// Note: It is necessary to enable inline feedback via @BotFather in order to receive these
-	// objects in updates.   Use this method to set the result of an interaction with a Web App and
-	// send a corresponding message on behalf of the user to the chat from which the query originated.
-	// On success, a SentWebAppMessage object is returned.
-	AnswerWebAppQuery(request *AnswerWebAppQueryRequest) (*AnswerWebAppQueryResponse, error)
-
-	// Your bot can accept payments from Telegram users. Please see the introduction to payments for
-	// more details on the process and how to set up payments for your bot.   Use this method to send
-	// invoices. On success, the sent Message is returned.
-	SendInvoice(request *SendInvoiceRequest) (*SendInvoiceResponse, error)
-
-	// Use this method to create a link for an invoice. Returns the created invoice link as String
-	// on success.
-	CreateInvoiceLink(request *CreateInvoiceLinkRequest) (*CreateInvoiceLinkResponse, error)
-
-	// If you sent an invoice requesting a shipping address and the parameter is_flexible was
-	// specified, the Bot API will send an Update with a shipping_query field to the bot. Use this
-	// method to reply to shipping queries. On success, True is returned.
-	AnswerShippingQuery(request *AnswerShippingQueryRequest) (*AnswerShippingQueryResponse, error)
-
-	// Once the user has confirmed their payment and shipping details, the Bot API sends the final
-	// confirmation in the form of an Update with the field pre_checkout_query . Use this method to
-	// respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must
-	// receive an answer within 10 seconds after the pre-checkout query was sent.
-	AnswerPreCheckoutQuery(request *AnswerPreCheckoutQueryRequest) (*AnswerPreCheckoutQueryResponse, error)
-
-	// Informs a user that some of the Telegram Passport elements they provided contains errors. The
-	// user will not be able to re-submit their Passport to you until the errors are fixed (the
-	// contents of the field for which you returned the error must change). Returns True on success.
-	// Use this if the data submitted by the user doesn't satisfy the standards your service requires
-	// for any reason. For example, if a birthday date seems invalid, a submitted document is blurry,
-	// a scan shows evidence of tampering, etc. Supply some details in the error message to make sure
-	// the user knows how to correct the issues.
-	SetPassportDataErrors(request *SetPassportDataErrorsRequest) (*SetPassportDataErrorsResponse, error)
-
-	// Your bot can offer users HTML5 games to play solo or to compete against each other in groups
-	// and one-on-one chats. Create games via @BotFather using the /newgame command. Please note that
-	// this kind of power requires responsibility: you will need to accept the terms for each game
-	// that your bots will be offering.   Games are a new type of content on Telegram, represented by
-	// the Game and InlineQueryResultGame objects.  Once you've created a game via BotFather , you can
-	// send games to chats as regular messages using the sendGame method, or use inline mode with
-	// InlineQueryResultGame .  If you send the game message without any buttons, it will
-	// automatically have a 'Play GameName ' button. When this button is pressed, your bot gets a
-	// CallbackQuery with the game_short_name of the requested game. You provide the correct URL for
-	// this particular user and the app opens the game in the in-app browser.  You can manually add
-	// multiple buttons to your game message. Please note that the first button in the first row must
-	// always launch the game, using the field callback_game in InlineKeyboardButton . You can add
-	// extra buttons according to taste: e.g., for a description of the rules, or to open the game's
-	// official community.  To make your game more attractive, you can upload a GIF animation that
-	// demostrates the game to the users via BotFather (see Lumberjack for example).  A game message
-	// will also display high scores for the current chat. Use setGameScore to post high scores to the
-	// chat with the game, add the edit_message parameter to automatically update the message with the
-	// current scoreboard.  Use getGameHighScores to get data for in-game high score tables.  You can
-	// also add an extra sharing button for users to share their best score to different chats.  For
-	// examples of what can be done using this new stuff, check the @gamebot and @gamee bots.    Use
-	// this method to send a game. On success, the sent Message is returned.
-	SendGame(request *SendGameRequest) (*SendGameResponse, error)
-
-	// Use this method to set the score of the specified user in a game message. On success, if the
-	// message is not an inline message, the Message is returned, otherwise True is returned. Returns
-	// an error, if the new score is not greater than the user's current score in the chat and force
-	// is False .
-	SetGameScore(request *SetGameScoreRequest) (*SetGameScoreResponse, error)
-
-	// Use this method to get data for high score tables. Will return the score of the specified
-	// user and several of their neighbors in a game. Returns an Array of GameHighScore objects.
-	// This method will currently return scores for the target user, plus two of their closest
-	// neighbors on each side. Will also return the top three users if the user and their neighbors
-	// are not among them. Please note that this behavior is subject to change.
-	GetGameHighScores(request *GetGameHighScoresRequest) (*GetGameHighScoresResponse, error)
+type TelegramApi struct {
+	bot TelegramBot
+}
+
+func NewTelegramApi(bot TelegramBot) *TelegramApi {
+	return &TelegramApi{bot: bot}
+}
+
+// Use this method to receive incoming updates using long polling ( wiki ). Returns an Array of
+// Update objects.
+func (a *TelegramApi) GetUpdates(request *GetUpdatesRequest) (*GetUpdatesResponse, error) {
+	apiResponse, err := queryAndUnmarshal[[]*Update](a.bot, "GetUpdates", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetUpdatesResponse{Result: apiResponse.Result}, nil
+}
+
+// Notes 1. This method will not work if an outgoing webhook is set up. 2. In order to avoid
+// getting duplicate updates, recalculate offset after each server response.    Use this method to
+// specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update
+// for the bot, we will send an HTTPS POST request to the specified URL, containing a
+// JSON-serialized Update . In case of an unsuccessful request, we will give up after a reasonable
+// amount of attempts. Returns True on success.  If you'd like to make sure that the webhook was
+// set by you, you can specify secret data in the parameter secret_token . If specified, the
+// request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as
+// content.
+func (a *TelegramApi) SetWebhook(request *SetWebhookRequest) (*SetWebhookResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetWebhook", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetWebhookResponse{}, nil
+}
+
+// Notes 1. You will not be able to receive updates using getUpdates for as long as an outgoing
+// webhook is set up. 2. To use a self-signed certificate, you need to upload your public key
+// certificate using certificate parameter. Please upload as InputFile, sending a String will not
+// work. 3. Ports currently supported for webhooks : 443, 80, 88, 8443 .  If you're having any
+// trouble setting up webhooks, please check out this amazing guide to webhooks .    Use this
+// method to remove webhook integration if you decide to switch back to getUpdates . Returns True
+// on success.
+func (a *TelegramApi) DeleteWebhook(request *DeleteWebhookRequest) (*DeleteWebhookResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "DeleteWebhook", request)
+	if err != nil {
+		return nil, err
+	}
+	return &DeleteWebhookResponse{}, nil
+}
+
+// Use this method to get current webhook status. Requires no parameters. On success, returns a
+// WebhookInfo object. If the bot is using getUpdates , will return an object with the url field
+// empty.
+func (a *TelegramApi) GetWebhookInfo(request *GetWebhookInfoRequest) (*GetWebhookInfoResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetWebhookInfo", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetWebhookInfoResponse{}, nil
+}
+
+// A simple method for testing your bot's authentication token. Requires no parameters. Returns
+// basic information about the bot in form of a User object.
+func (a *TelegramApi) GetMe(request *GetMeRequest) (*GetMeResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetMe", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetMeResponse{}, nil
+}
+
+// Use this method to log out from the cloud Bot API server before launching the bot locally. You
+// must log out the bot before running it locally, otherwise there is no guarantee that the bot
+// will receive updates. After a successful call, you can immediately log in on a local server,
+// but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on
+// success. Requires no parameters.
+func (a *TelegramApi) LogOut(request *LogOutRequest) (*LogOutResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "LogOut", request)
+	if err != nil {
+		return nil, err
+	}
+	return &LogOutResponse{}, nil
+}
+
+// Use this method to close the bot instance before moving it from one local server to another.
+// You need to delete the webhook before calling this method to ensure that the bot isn't launched
+// again after server restart. The method will return error 429 in the first 10 minutes after the
+// bot is launched. Returns True on success. Requires no parameters.
+func (a *TelegramApi) Close(request *CloseRequest) (*CloseResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "Close", request)
+	if err != nil {
+		return nil, err
+	}
+	return &CloseResponse{}, nil
+}
+
+// Use this method to send text messages. On success, the sent Message is returned.
+func (a *TelegramApi) SendMessage(request *SendMessageRequest) (*SendMessageResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendMessage", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendMessageResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to forward messages of any kind. Service messages and messages with protected
+// content can't be forwarded. On success, the sent Message is returned.
+func (a *TelegramApi) ForwardMessage(request *ForwardMessageRequest) (*ForwardMessageResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "ForwardMessage", request)
+	if err != nil {
+		return nil, err
+	}
+	return &ForwardMessageResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to forward multiple messages of any kind. If some of the specified messages
+// can't be found or forwarded, they are skipped. Service messages and messages with protected
+// content can't be forwarded. Album grouping is kept for forwarded messages. On success, an array
+// of MessageId of the sent messages is returned.
+func (a *TelegramApi) ForwardMessages(request *ForwardMessagesRequest) (*ForwardMessagesResponse, error) {
+	apiResponse, err := queryAndUnmarshal[[]*MessageId](a.bot, "ForwardMessages", request)
+	if err != nil {
+		return nil, err
+	}
+	return &ForwardMessagesResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to copy messages of any kind. Service messages, giveaway messages, giveaway
+// winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the
+// value of the field correct_option_id is known to the bot. The method is analogous to the method
+// forwardMessage , but the copied message doesn't have a link to the original message. Returns
+// the MessageId of the sent message on success.
+func (a *TelegramApi) CopyMessage(request *CopyMessageRequest) (*CopyMessageResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "CopyMessage", request)
+	if err != nil {
+		return nil, err
+	}
+	return &CopyMessageResponse{}, nil
+}
+
+// Use this method to copy messages of any kind. If some of the specified messages can't be
+// found or copied, they are skipped. Service messages, giveaway messages, giveaway winners
+// messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of
+// the field correct_option_id is known to the bot. The method is analogous to the method
+// forwardMessages , but the copied messages don't have a link to the original message. Album
+// grouping is kept for copied messages. On success, an array of MessageId of the sent messages is
+// returned.
+func (a *TelegramApi) CopyMessages(request *CopyMessagesRequest) (*CopyMessagesResponse, error) {
+	apiResponse, err := queryAndUnmarshal[[]*MessageId](a.bot, "CopyMessages", request)
+	if err != nil {
+		return nil, err
+	}
+	return &CopyMessagesResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to send photos. On success, the sent Message is returned.
+func (a *TelegramApi) SendPhoto(request *SendPhotoRequest) (*SendPhotoResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendPhoto", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendPhotoResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to send audio files, if you want Telegram clients to display them in the
+// music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is
+// returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed
+// in the future.  For sending voice messages, use the sendVoice method instead.
+func (a *TelegramApi) SendAudio(request *SendAudioRequest) (*SendAudioResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendAudio", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendAudioResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to send general files. On success, the sent Message is returned. Bots can
+// currently send files of any type of up to 50 MB in size, this limit may be changed in the
+// future.
+func (a *TelegramApi) SendDocument(request *SendDocumentRequest) (*SendDocumentResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendDocument", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendDocumentResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to send video files, Telegram clients support MPEG4 videos (other formats may
+// be sent as Document ). On success, the sent Message is returned. Bots can currently send video
+// files of up to 50 MB in size, this limit may be changed in the future.
+func (a *TelegramApi) SendVideo(request *SendVideoRequest) (*SendVideoResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendVideo", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendVideoResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On
+// success, the sent Message is returned. Bots can currently send animation files of up to 50 MB
+// in size, this limit may be changed in the future.
+func (a *TelegramApi) SendAnimation(request *SendAnimationRequest) (*SendAnimationResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendAnimation", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendAnimationResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to send audio files, if you want Telegram clients to display the file as a
+// playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS
+// (other formats may be sent as Audio or Document ). On success, the sent Message is returned.
+// Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the
+// future.
+func (a *TelegramApi) SendVoice(request *SendVoiceRequest) (*SendVoiceResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendVoice", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendVoiceResponse{Result: apiResponse.Result}, nil
+}
+
+// As of v.4.0 , Telegram clients support rounded square MPEG4 videos of up to 1 minute long.
+// Use this method to send video messages. On success, the sent Message is returned.
+func (a *TelegramApi) SendVideoNote(request *SendVideoNoteRequest) (*SendVideoNoteResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendVideoNote", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendVideoNoteResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to send point on the map. On success, the sent Message is returned.
+func (a *TelegramApi) SendLocation(request *SendLocationRequest) (*SendLocationResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendLocation", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendLocationResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to send information about a venue. On success, the sent Message is returned.
+func (a *TelegramApi) SendVenue(request *SendVenueRequest) (*SendVenueResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendVenue", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendVenueResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to send phone contacts. On success, the sent Message is returned.
+func (a *TelegramApi) SendContact(request *SendContactRequest) (*SendContactResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendContact", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendContactResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to send a native poll. On success, the sent Message is returned.
+func (a *TelegramApi) SendPoll(request *SendPollRequest) (*SendPollResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendPoll", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendPollResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to send an animated emoji that will display a random value. On success, the
+// sent Message is returned.
+func (a *TelegramApi) SendDice(request *SendDiceRequest) (*SendDiceResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendDice", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendDiceResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method when you need to tell the user that something is happening on the bot's side.
+// The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients
+// clear its typing status). Returns True on success.   Example: The ImageBot needs some time to
+// process a request and upload the image. Instead of sending a text message along the lines of
+// “Retrieving image, please wait…”, the bot may use sendChatAction with action = upload_photo .
+// The user will see a “sending photo” status for the bot.   We only recommend using this method
+// when a response from the bot will take a noticeable amount of time to arrive.
+func (a *TelegramApi) SendChatAction(request *SendChatActionRequest) (*SendChatActionResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SendChatAction", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendChatActionResponse{}, nil
+}
+
+// Use this method to change the chosen reactions on a message. Service messages can't be
+// reacted to. Automatically forwarded messages from a channel to its discussion group have the
+// same available reactions as messages in the channel. Returns True on success.
+func (a *TelegramApi) SetMessageReaction(request *SetMessageReactionRequest) (*SetMessageReactionResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetMessageReaction", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetMessageReactionResponse{}, nil
+}
+
+// Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos
+// object.
+func (a *TelegramApi) GetUserProfilePhotos(request *GetUserProfilePhotosRequest) (*GetUserProfilePhotosResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetUserProfilePhotos", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetUserProfilePhotosResponse{}, nil
+}
+
+// Use this method to get basic information about a file and prepare it for downloading. For the
+// moment, bots can download files of up to 20MB in size. On success, a File object is returned.
+// The file can then be downloaded via the link
+// https://api.telegram.org/file/bot<token>/<file_path> , where <file_path> is taken from the
+// response. It is guaranteed that the link will be valid for at least 1 hour. When the link
+// expires, a new one can be requested by calling getFile again.
+func (a *TelegramApi) GetFile(request *GetFileRequest) (*GetFileResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*File](a.bot, "GetFile", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetFileResponse{Result: apiResponse.Result}, nil
+}
+
+// Note: This function may not preserve the original file name and MIME type. You should save the
+// file's MIME type and name (if available) when the File object is received.   Use this method to
+// ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the
+// user will not be able to return to the chat on their own using invite links, etc., unless
+// unbanned first. The bot must be an administrator in the chat for this to work and must have the
+// appropriate administrator rights. Returns True on success.
+func (a *TelegramApi) BanChatMember(request *BanChatMemberRequest) (*BanChatMemberResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "BanChatMember", request)
+	if err != nil {
+		return nil, err
+	}
+	return &BanChatMemberResponse{}, nil
+}
+
+// Use this method to unban a previously banned user in a supergroup or channel. The user will
+// not return to the group or channel automatically, but will be able to join via link, etc. The
+// bot must be an administrator for this to work. By default, this method guarantees that after
+// the call the user is not a member of the chat, but will be able to join it. So if the user is a
+// member of the chat they will also be removed from the chat. If you don't want this, use the
+// parameter only_if_banned . Returns True on success.
+func (a *TelegramApi) UnbanChatMember(request *UnbanChatMemberRequest) (*UnbanChatMemberResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "UnbanChatMember", request)
+	if err != nil {
+		return nil, err
+	}
+	return &UnbanChatMemberResponse{}, nil
+}
+
+// Use this method to restrict a user in a supergroup. The bot must be an administrator in the
+// supergroup for this to work and must have the appropriate administrator rights. Pass True for
+// all permissions to lift restrictions from a user. Returns True on success.
+func (a *TelegramApi) RestrictChatMember(request *RestrictChatMemberRequest) (*RestrictChatMemberResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "RestrictChatMember", request)
+	if err != nil {
+		return nil, err
+	}
+	return &RestrictChatMemberResponse{}, nil
+}
+
+// Use this method to promote or demote a user in a supergroup or a channel. The bot must be an
+// administrator in the chat for this to work and must have the appropriate administrator rights.
+// Pass False for all boolean parameters to demote a user. Returns True on success.
+func (a *TelegramApi) PromoteChatMember(request *PromoteChatMemberRequest) (*PromoteChatMemberResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "PromoteChatMember", request)
+	if err != nil {
+		return nil, err
+	}
+	return &PromoteChatMemberResponse{}, nil
+}
+
+// Use this method to set a custom title for an administrator in a supergroup promoted by the
+// bot. Returns True on success.
+func (a *TelegramApi) SetChatAdministratorCustomTitle(request *SetChatAdministratorCustomTitleRequest) (*SetChatAdministratorCustomTitleResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetChatAdministratorCustomTitle", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetChatAdministratorCustomTitleResponse{}, nil
+}
+
+// Use this method to ban a channel chat in a supergroup or a channel. Until the chat is
+// unbanned , the owner of the banned chat won't be able to send messages on behalf of any of
+// their channels . The bot must be an administrator in the supergroup or channel for this to work
+// and must have the appropriate administrator rights. Returns True on success.
+func (a *TelegramApi) BanChatSenderChat(request *BanChatSenderChatRequest) (*BanChatSenderChatResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "BanChatSenderChat", request)
+	if err != nil {
+		return nil, err
+	}
+	return &BanChatSenderChatResponse{}, nil
+}
+
+// Use this method to unban a previously banned channel chat in a supergroup or channel. The bot
+// must be an administrator for this to work and must have the appropriate administrator rights.
+// Returns True on success.
+func (a *TelegramApi) UnbanChatSenderChat(request *UnbanChatSenderChatRequest) (*UnbanChatSenderChatResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "UnbanChatSenderChat", request)
+	if err != nil {
+		return nil, err
+	}
+	return &UnbanChatSenderChatResponse{}, nil
+}
+
+// Use this method to set default chat permissions for all members. The bot must be an
+// administrator in the group or a supergroup for this to work and must have the
+// can_restrict_members administrator rights. Returns True on success.
+func (a *TelegramApi) SetChatPermissions(request *SetChatPermissionsRequest) (*SetChatPermissionsResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetChatPermissions", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetChatPermissionsResponse{}, nil
+}
+
+// Use this method to generate a new primary invite link for a chat; any previously generated
+// primary link is revoked. The bot must be an administrator in the chat for this to work and must
+// have the appropriate administrator rights. Returns the new invite link as String on success.
+func (a *TelegramApi) ExportChatInviteLink(request *ExportChatInviteLinkRequest) (*ExportChatInviteLinkResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "ExportChatInviteLink", request)
+	if err != nil {
+		return nil, err
+	}
+	return &ExportChatInviteLinkResponse{}, nil
+}
+
+// Note: Each administrator in a chat generates their own invite links. Bots can't use invite
+// links generated by other administrators. If you want your bot to work with invite links, it
+// will need to generate its own link using exportChatInviteLink or by calling the getChat method.
+// If your bot needs to generate a new primary invite link replacing its previous one, use
+// exportChatInviteLink again.    Use this method to create an additional invite link for a chat.
+// The bot must be an administrator in the chat for this to work and must have the appropriate
+// administrator rights. The link can be revoked using the method revokeChatInviteLink . Returns
+// the new invite link as ChatInviteLink object.
+func (a *TelegramApi) CreateChatInviteLink(request *CreateChatInviteLinkRequest) (*CreateChatInviteLinkResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "CreateChatInviteLink", request)
+	if err != nil {
+		return nil, err
+	}
+	return &CreateChatInviteLinkResponse{}, nil
+}
+
+// Use this method to edit a non-primary invite link created by the bot. The bot must be an
+// administrator in the chat for this to work and must have the appropriate administrator rights.
+// Returns the edited invite link as a ChatInviteLink object.
+func (a *TelegramApi) EditChatInviteLink(request *EditChatInviteLinkRequest) (*EditChatInviteLinkResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "EditChatInviteLink", request)
+	if err != nil {
+		return nil, err
+	}
+	return &EditChatInviteLinkResponse{}, nil
+}
+
+// Use this method to revoke an invite link created by the bot. If the primary link is revoked,
+// a new link is automatically generated. The bot must be an administrator in the chat for this to
+// work and must have the appropriate administrator rights. Returns the revoked invite link as
+// ChatInviteLink object.
+func (a *TelegramApi) RevokeChatInviteLink(request *RevokeChatInviteLinkRequest) (*RevokeChatInviteLinkResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "RevokeChatInviteLink", request)
+	if err != nil {
+		return nil, err
+	}
+	return &RevokeChatInviteLinkResponse{}, nil
+}
+
+// Use this method to approve a chat join request. The bot must be an administrator in the chat
+// for this to work and must have the can_invite_users administrator right. Returns True on
+// success.
+func (a *TelegramApi) ApproveChatJoinRequest(request *ApproveChatJoinRequestRequest) (*ApproveChatJoinRequestResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "ApproveChatJoinRequest", request)
+	if err != nil {
+		return nil, err
+	}
+	return &ApproveChatJoinRequestResponse{}, nil
+}
+
+// Use this method to decline a chat join request. The bot must be an administrator in the chat
+// for this to work and must have the can_invite_users administrator right. Returns True on
+// success.
+func (a *TelegramApi) DeclineChatJoinRequest(request *DeclineChatJoinRequestRequest) (*DeclineChatJoinRequestResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "DeclineChatJoinRequest", request)
+	if err != nil {
+		return nil, err
+	}
+	return &DeclineChatJoinRequestResponse{}, nil
+}
+
+// Use this method to set a new profile photo for the chat. Photos can't be changed for private
+// chats. The bot must be an administrator in the chat for this to work and must have the
+// appropriate administrator rights. Returns True on success.
+func (a *TelegramApi) SetChatPhoto(request *SetChatPhotoRequest) (*SetChatPhotoResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetChatPhoto", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetChatPhotoResponse{}, nil
+}
+
+// Use this method to delete a chat photo. Photos can't be changed for private chats. The bot
+// must be an administrator in the chat for this to work and must have the appropriate
+// administrator rights. Returns True on success.
+func (a *TelegramApi) DeleteChatPhoto(request *DeleteChatPhotoRequest) (*DeleteChatPhotoResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "DeleteChatPhoto", request)
+	if err != nil {
+		return nil, err
+	}
+	return &DeleteChatPhotoResponse{}, nil
+}
+
+// Use this method to change the title of a chat. Titles can't be changed for private chats. The
+// bot must be an administrator in the chat for this to work and must have the appropriate
+// administrator rights. Returns True on success.
+func (a *TelegramApi) SetChatTitle(request *SetChatTitleRequest) (*SetChatTitleResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetChatTitle", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetChatTitleResponse{}, nil
+}
+
+// Use this method to change the description of a group, a supergroup or a channel. The bot must
+// be an administrator in the chat for this to work and must have the appropriate administrator
+// rights. Returns True on success.
+func (a *TelegramApi) SetChatDescription(request *SetChatDescriptionRequest) (*SetChatDescriptionResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetChatDescription", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetChatDescriptionResponse{}, nil
+}
+
+// Use this method to add a message to the list of pinned messages in a chat. If the chat is not
+// a private chat, the bot must be an administrator in the chat for this to work and must have the
+// 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator
+// right in a channel. Returns True on success.
+func (a *TelegramApi) PinChatMessage(request *PinChatMessageRequest) (*PinChatMessageResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "PinChatMessage", request)
+	if err != nil {
+		return nil, err
+	}
+	return &PinChatMessageResponse{}, nil
+}
+
+// Use this method to remove a message from the list of pinned messages in a chat. If the chat
+// is not a private chat, the bot must be an administrator in the chat for this to work and must
+// have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages'
+// administrator right in a channel. Returns True on success.
+func (a *TelegramApi) UnpinChatMessage(request *UnpinChatMessageRequest) (*UnpinChatMessageResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "UnpinChatMessage", request)
+	if err != nil {
+		return nil, err
+	}
+	return &UnpinChatMessageResponse{}, nil
+}
+
+// Use this method to clear the list of pinned messages in a chat. If the chat is not a private
+// chat, the bot must be an administrator in the chat for this to work and must have the
+// 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator
+// right in a channel. Returns True on success.
+func (a *TelegramApi) UnpinAllChatMessages(request *UnpinAllChatMessagesRequest) (*UnpinAllChatMessagesResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "UnpinAllChatMessages", request)
+	if err != nil {
+		return nil, err
+	}
+	return &UnpinAllChatMessagesResponse{}, nil
+}
+
+// Use this method for your bot to leave a group, supergroup or channel. Returns True on
+// success.
+func (a *TelegramApi) LeaveChat(request *LeaveChatRequest) (*LeaveChatResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "LeaveChat", request)
+	if err != nil {
+		return nil, err
+	}
+	return &LeaveChatResponse{}, nil
+}
+
+// Use this method to get up to date information about the chat. Returns a Chat object on
+// success.
+func (a *TelegramApi) GetChat(request *GetChatRequest) (*GetChatResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetChat", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetChatResponse{}, nil
+}
+
+// Use this method to get a list of administrators in a chat, which aren't bots. Returns an
+// Array of ChatMember objects.
+func (a *TelegramApi) GetChatAdministrators(request *GetChatAdministratorsRequest) (*GetChatAdministratorsResponse, error) {
+	apiResponse, err := queryAndUnmarshal[[]*ChatMember](a.bot, "GetChatAdministrators", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetChatAdministratorsResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to get the number of members in a chat. Returns Int on success.
+func (a *TelegramApi) GetChatMemberCount(request *GetChatMemberCountRequest) (*GetChatMemberCountResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetChatMemberCount", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetChatMemberCountResponse{}, nil
+}
+
+// Use this method to get information about a member of a chat. The method is only guaranteed to
+// work for other users if the bot is an administrator in the chat. Returns a ChatMember object on
+// success.
+func (a *TelegramApi) GetChatMember(request *GetChatMemberRequest) (*GetChatMemberResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetChatMember", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetChatMemberResponse{}, nil
+}
+
+// Use this method to set a new group sticker set for a supergroup. The bot must be an
+// administrator in the chat for this to work and must have the appropriate administrator rights.
+// Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot
+// can use this method. Returns True on success.
+func (a *TelegramApi) SetChatStickerSet(request *SetChatStickerSetRequest) (*SetChatStickerSetResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetChatStickerSet", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetChatStickerSetResponse{}, nil
+}
+
+// Use this method to delete a group sticker set from a supergroup. The bot must be an
+// administrator in the chat for this to work and must have the appropriate administrator rights.
+// Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot
+// can use this method. Returns True on success.
+func (a *TelegramApi) DeleteChatStickerSet(request *DeleteChatStickerSetRequest) (*DeleteChatStickerSetResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "DeleteChatStickerSet", request)
+	if err != nil {
+		return nil, err
+	}
+	return &DeleteChatStickerSetResponse{}, nil
+}
+
+// Use this method to get custom emoji stickers, which can be used as a forum topic icon by any
+// user. Requires no parameters. Returns an Array of Sticker objects.
+func (a *TelegramApi) GetForumTopicIconStickers(request *GetForumTopicIconStickersRequest) (*GetForumTopicIconStickersResponse, error) {
+	apiResponse, err := queryAndUnmarshal[[]*Sticker](a.bot, "GetForumTopicIconStickers", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetForumTopicIconStickersResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to create a topic in a forum supergroup chat. The bot must be an administrator
+// in the chat for this to work and must have the can_manage_topics administrator rights. Returns
+// information about the created topic as a ForumTopic object.
+func (a *TelegramApi) CreateForumTopic(request *CreateForumTopicRequest) (*CreateForumTopicResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "CreateForumTopic", request)
+	if err != nil {
+		return nil, err
+	}
+	return &CreateForumTopicResponse{}, nil
+}
+
+// Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be
+// an administrator in the chat for this to work and must have can_manage_topics administrator
+// rights, unless it is the creator of the topic. Returns True on success.
+func (a *TelegramApi) EditForumTopic(request *EditForumTopicRequest) (*EditForumTopicResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "EditForumTopic", request)
+	if err != nil {
+		return nil, err
+	}
+	return &EditForumTopicResponse{}, nil
+}
+
+// Use this method to close an open topic in a forum supergroup chat. The bot must be an
+// administrator in the chat for this to work and must have the can_manage_topics administrator
+// rights, unless it is the creator of the topic. Returns True on success.
+func (a *TelegramApi) CloseForumTopic(request *CloseForumTopicRequest) (*CloseForumTopicResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "CloseForumTopic", request)
+	if err != nil {
+		return nil, err
+	}
+	return &CloseForumTopicResponse{}, nil
+}
+
+// Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an
+// administrator in the chat for this to work and must have the can_manage_topics administrator
+// rights, unless it is the creator of the topic. Returns True on success.
+func (a *TelegramApi) ReopenForumTopic(request *ReopenForumTopicRequest) (*ReopenForumTopicResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "ReopenForumTopic", request)
+	if err != nil {
+		return nil, err
+	}
+	return &ReopenForumTopicResponse{}, nil
+}
+
+// Use this method to delete a forum topic along with all its messages in a forum supergroup
+// chat. The bot must be an administrator in the chat for this to work and must have the
+// can_delete_messages administrator rights. Returns True on success.
+func (a *TelegramApi) DeleteForumTopic(request *DeleteForumTopicRequest) (*DeleteForumTopicResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "DeleteForumTopic", request)
+	if err != nil {
+		return nil, err
+	}
+	return &DeleteForumTopicResponse{}, nil
+}
+
+// Use this method to clear the list of pinned messages in a forum topic. The bot must be an
+// administrator in the chat for this to work and must have the can_pin_messages administrator
+// right in the supergroup. Returns True on success.
+func (a *TelegramApi) UnpinAllForumTopicMessages(request *UnpinAllForumTopicMessagesRequest) (*UnpinAllForumTopicMessagesResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "UnpinAllForumTopicMessages", request)
+	if err != nil {
+		return nil, err
+	}
+	return &UnpinAllForumTopicMessagesResponse{}, nil
+}
+
+// Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot
+// must be an administrator in the chat for this to work and must have can_manage_topics
+// administrator rights. Returns True on success.
+func (a *TelegramApi) EditGeneralForumTopic(request *EditGeneralForumTopicRequest) (*EditGeneralForumTopicResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "EditGeneralForumTopic", request)
+	if err != nil {
+		return nil, err
+	}
+	return &EditGeneralForumTopicResponse{}, nil
+}
+
+// Use this method to close an open 'General' topic in a forum supergroup chat. The bot must be
+// an administrator in the chat for this to work and must have the can_manage_topics administrator
+// rights. Returns True on success.
+func (a *TelegramApi) CloseGeneralForumTopic(request *CloseGeneralForumTopicRequest) (*CloseGeneralForumTopicResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "CloseGeneralForumTopic", request)
+	if err != nil {
+		return nil, err
+	}
+	return &CloseGeneralForumTopicResponse{}, nil
+}
+
+// Use this method to reopen a closed 'General' topic in a forum supergroup chat. The bot must
+// be an administrator in the chat for this to work and must have the can_manage_topics
+// administrator rights. The topic will be automatically unhidden if it was hidden. Returns True
+// on success.
+func (a *TelegramApi) ReopenGeneralForumTopic(request *ReopenGeneralForumTopicRequest) (*ReopenGeneralForumTopicResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "ReopenGeneralForumTopic", request)
+	if err != nil {
+		return nil, err
+	}
+	return &ReopenGeneralForumTopicResponse{}, nil
+}
+
+// Use this method to hide the 'General' topic in a forum supergroup chat. The bot must be an
+// administrator in the chat for this to work and must have the can_manage_topics administrator
+// rights. The topic will be automatically closed if it was open. Returns True on success.
+func (a *TelegramApi) HideGeneralForumTopic(request *HideGeneralForumTopicRequest) (*HideGeneralForumTopicResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "HideGeneralForumTopic", request)
+	if err != nil {
+		return nil, err
+	}
+	return &HideGeneralForumTopicResponse{}, nil
+}
+
+// Use this method to unhide the 'General' topic in a forum supergroup chat. The bot must be an
+// administrator in the chat for this to work and must have the can_manage_topics administrator
+// rights. Returns True on success.
+func (a *TelegramApi) UnhideGeneralForumTopic(request *UnhideGeneralForumTopicRequest) (*UnhideGeneralForumTopicResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "UnhideGeneralForumTopic", request)
+	if err != nil {
+		return nil, err
+	}
+	return &UnhideGeneralForumTopicResponse{}, nil
+}
+
+// Use this method to clear the list of pinned messages in a General forum topic. The bot must
+// be an administrator in the chat for this to work and must have the can_pin_messages
+// administrator right in the supergroup. Returns True on success.
+func (a *TelegramApi) UnpinAllGeneralForumTopicMessages(request *UnpinAllGeneralForumTopicMessagesRequest) (*UnpinAllGeneralForumTopicMessagesResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "UnpinAllGeneralForumTopicMessages", request)
+	if err != nil {
+		return nil, err
+	}
+	return &UnpinAllGeneralForumTopicMessagesResponse{}, nil
+}
+
+// Use this method to send answers to callback queries sent from inline keyboards . The answer
+// will be displayed to the user as a notification at the top of the chat screen or as an alert.
+// On success, True is returned.   Alternatively, the user can be redirected to the specified Game
+// URL. For this option to work, you must first create a game for your bot via @BotFather and
+// accept the terms. Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot
+// with a parameter.
+func (a *TelegramApi) AnswerCallbackQuery(request *AnswerCallbackQueryRequest) (*AnswerCallbackQueryResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "AnswerCallbackQuery", request)
+	if err != nil {
+		return nil, err
+	}
+	return &AnswerCallbackQueryResponse{}, nil
+}
+
+// Use this method to get the list of boosts added to a chat by a user. Requires administrator
+// rights in the chat. Returns a UserChatBoosts object.
+func (a *TelegramApi) GetUserChatBoosts(request *GetUserChatBoostsRequest) (*GetUserChatBoostsResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetUserChatBoosts", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetUserChatBoostsResponse{}, nil
+}
+
+// Use this method to change the list of the bot's commands. See this manual for more details
+// about bot commands. Returns True on success.
+func (a *TelegramApi) SetMyCommands(request *SetMyCommandsRequest) (*SetMyCommandsResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetMyCommands", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetMyCommandsResponse{}, nil
+}
+
+// Use this method to delete the list of the bot's commands for the given scope and user
+// language. After deletion, higher level commands will be shown to affected users. Returns True
+// on success.
+func (a *TelegramApi) DeleteMyCommands(request *DeleteMyCommandsRequest) (*DeleteMyCommandsResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "DeleteMyCommands", request)
+	if err != nil {
+		return nil, err
+	}
+	return &DeleteMyCommandsResponse{}, nil
+}
+
+// Use this method to get the current list of the bot's commands for the given scope and user
+// language. Returns an Array of BotCommand objects. If commands aren't set, an empty list is
+// returned.
+func (a *TelegramApi) GetMyCommands(request *GetMyCommandsRequest) (*GetMyCommandsResponse, error) {
+	apiResponse, err := queryAndUnmarshal[[]*BotCommand](a.bot, "GetMyCommands", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetMyCommandsResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to change the bot's name. Returns True on success.
+func (a *TelegramApi) SetMyName(request *SetMyNameRequest) (*SetMyNameResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetMyName", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetMyNameResponse{}, nil
+}
+
+// Use this method to get the current bot name for the given user language. Returns BotName on
+// success.
+func (a *TelegramApi) GetMyName(request *GetMyNameRequest) (*GetMyNameResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetMyName", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetMyNameResponse{}, nil
+}
+
+// Use this method to change the bot's description, which is shown in the chat with the bot if
+// the chat is empty. Returns True on success.
+func (a *TelegramApi) SetMyDescription(request *SetMyDescriptionRequest) (*SetMyDescriptionResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetMyDescription", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetMyDescriptionResponse{}, nil
+}
+
+// Use this method to get the current bot description for the given user language. Returns
+// BotDescription on success.
+func (a *TelegramApi) GetMyDescription(request *GetMyDescriptionRequest) (*GetMyDescriptionResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetMyDescription", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetMyDescriptionResponse{}, nil
+}
+
+// Use this method to change the bot's short description, which is shown on the bot's profile
+// page and is sent together with the link when users share the bot. Returns True on success.
+func (a *TelegramApi) SetMyShortDescription(request *SetMyShortDescriptionRequest) (*SetMyShortDescriptionResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetMyShortDescription", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetMyShortDescriptionResponse{}, nil
+}
+
+// Use this method to get the current bot short description for the given user language. Returns
+// BotShortDescription on success.
+func (a *TelegramApi) GetMyShortDescription(request *GetMyShortDescriptionRequest) (*GetMyShortDescriptionResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetMyShortDescription", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetMyShortDescriptionResponse{}, nil
+}
+
+// Use this method to change the bot's menu button in a private chat, or the default menu
+// button. Returns True on success.
+func (a *TelegramApi) SetChatMenuButton(request *SetChatMenuButtonRequest) (*SetChatMenuButtonResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetChatMenuButton", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetChatMenuButtonResponse{}, nil
+}
+
+// Use this method to get the current value of the bot's menu button in a private chat, or the
+// default menu button. Returns MenuButton on success.
+func (a *TelegramApi) GetChatMenuButton(request *GetChatMenuButtonRequest) (*GetChatMenuButtonResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetChatMenuButton", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetChatMenuButtonResponse{}, nil
+}
+
+// Use this method to change the default administrator rights requested by the bot when it's
+// added as an administrator to groups or channels. These rights will be suggested to users, but
+// they are free to modify the list before adding the bot. Returns True on success.
+func (a *TelegramApi) SetMyDefaultAdministratorRights(request *SetMyDefaultAdministratorRightsRequest) (*SetMyDefaultAdministratorRightsResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetMyDefaultAdministratorRights", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetMyDefaultAdministratorRightsResponse{}, nil
+}
+
+// Use this method to get the current default administrator rights of the bot. Returns
+// ChatAdministratorRights on success.
+func (a *TelegramApi) GetMyDefaultAdministratorRights(request *GetMyDefaultAdministratorRightsRequest) (*GetMyDefaultAdministratorRightsResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "GetMyDefaultAdministratorRights", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetMyDefaultAdministratorRightsResponse{}, nil
+}
+
+// Use this method to edit text and game messages. On success, if the edited message is not an
+// inline message, the edited Message is returned, otherwise True is returned.
+func (a *TelegramApi) EditMessageText(request *EditMessageTextRequest) (*EditMessageTextResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "EditMessageText", request)
+	if err != nil {
+		return nil, err
+	}
+	return &EditMessageTextResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to edit captions of messages. On success, if the edited message is not an
+// inline message, the edited Message is returned, otherwise True is returned.
+func (a *TelegramApi) EditMessageCaption(request *EditMessageCaptionRequest) (*EditMessageCaptionResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "EditMessageCaption", request)
+	if err != nil {
+		return nil, err
+	}
+	return &EditMessageCaptionResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to edit animation, audio, document, photo, or video messages. If a message is
+// part of a message album, then it can be edited only to an audio for audio albums, only to a
+// document for document albums and to a photo or a video otherwise. When an inline message is
+// edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify
+// a URL. On success, if the edited message is not an inline message, the edited Message is
+// returned, otherwise True is returned.
+func (a *TelegramApi) EditMessageMedia(request *EditMessageMediaRequest) (*EditMessageMediaResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "EditMessageMedia", request)
+	if err != nil {
+		return nil, err
+	}
+	return &EditMessageMediaResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to edit live location messages. A location can be edited until its
+// live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation . On
+// success, if the edited message is not an inline message, the edited Message is returned,
+// otherwise True is returned.
+func (a *TelegramApi) EditMessageLiveLocation(request *EditMessageLiveLocationRequest) (*EditMessageLiveLocationResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "EditMessageLiveLocation", request)
+	if err != nil {
+		return nil, err
+	}
+	return &EditMessageLiveLocationResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to stop updating a live location message before live_period expires. On
+// success, if the message is not an inline message, the edited Message is returned, otherwise
+// True is returned.
+func (a *TelegramApi) StopMessageLiveLocation(request *StopMessageLiveLocationRequest) (*StopMessageLiveLocationResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "StopMessageLiveLocation", request)
+	if err != nil {
+		return nil, err
+	}
+	return &StopMessageLiveLocationResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to edit only the reply markup of messages. On success, if the edited message
+// is not an inline message, the edited Message is returned, otherwise True is returned.
+func (a *TelegramApi) EditMessageReplyMarkup(request *EditMessageReplyMarkupRequest) (*EditMessageReplyMarkupResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "EditMessageReplyMarkup", request)
+	if err != nil {
+		return nil, err
+	}
+	return &EditMessageReplyMarkupResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is
+// returned.
+func (a *TelegramApi) StopPoll(request *StopPollRequest) (*StopPollResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Poll](a.bot, "StopPoll", request)
+	if err != nil {
+		return nil, err
+	}
+	return &StopPollResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to delete a message, including service messages, with the following
+// limitations: - A message can only be deleted if it was sent less than 48 hours ago. - Service
+// messages about a supergroup, channel, or forum topic creation can't be deleted. - A dice
+// message in a private chat can only be deleted if it was sent more than 24 hours ago. - Bots can
+// delete outgoing messages in private chats, groups, and supergroups. - Bots can delete incoming
+// messages in private chats. - Bots granted can_post_messages permissions can delete outgoing
+// messages in channels. - If the bot is an administrator of a group, it can delete any message
+// there. - If the bot has can_delete_messages permission in a supergroup or a channel, it can
+// delete any message there. Returns True on success.
+func (a *TelegramApi) DeleteMessage(request *DeleteMessageRequest) (*DeleteMessageResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "DeleteMessage", request)
+	if err != nil {
+		return nil, err
+	}
+	return &DeleteMessageResponse{}, nil
+}
+
+// Use this method to delete multiple messages simultaneously. If some of the specified messages
+// can't be found, they are skipped. Returns True on success.
+func (a *TelegramApi) DeleteMessages(request *DeleteMessagesRequest) (*DeleteMessagesResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "DeleteMessages", request)
+	if err != nil {
+		return nil, err
+	}
+	return &DeleteMessagesResponse{}, nil
+}
+
+// Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the
+// sent Message is returned.
+func (a *TelegramApi) SendSticker(request *SendStickerRequest) (*SendStickerResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendSticker", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendStickerResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to get a sticker set. On success, a StickerSet object is returned.
+func (a *TelegramApi) GetStickerSet(request *GetStickerSetRequest) (*GetStickerSetResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*StickerSet](a.bot, "GetStickerSet", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetStickerSetResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to get information about custom emoji stickers by their identifiers. Returns
+// an Array of Sticker objects.
+func (a *TelegramApi) GetCustomEmojiStickers(request *GetCustomEmojiStickersRequest) (*GetCustomEmojiStickersResponse, error) {
+	apiResponse, err := queryAndUnmarshal[[]*Sticker](a.bot, "GetCustomEmojiStickers", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetCustomEmojiStickersResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to upload a file with a sticker for later use in the createNewStickerSet and
+// addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on
+// success.
+func (a *TelegramApi) UploadStickerFile(request *UploadStickerFileRequest) (*UploadStickerFileResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "UploadStickerFile", request)
+	if err != nil {
+		return nil, err
+	}
+	return &UploadStickerFileResponse{}, nil
+}
+
+// Use this method to create a new sticker set owned by a user. The bot will be able to edit the
+// sticker set thus created. Returns True on success.
+func (a *TelegramApi) CreateNewStickerSet(request *CreateNewStickerSetRequest) (*CreateNewStickerSetResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "CreateNewStickerSet", request)
+	if err != nil {
+		return nil, err
+	}
+	return &CreateNewStickerSetResponse{}, nil
+}
+
+// Use this method to add a new sticker to a set created by the bot. The format of the added
+// sticker must match the format of the other stickers in the set. Emoji sticker sets can have up
+// to 200 stickers. Animated and video sticker sets can have up to 50 stickers. Static sticker
+// sets can have up to 120 stickers. Returns True on success.
+func (a *TelegramApi) AddStickerToSet(request *AddStickerToSetRequest) (*AddStickerToSetResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "AddStickerToSet", request)
+	if err != nil {
+		return nil, err
+	}
+	return &AddStickerToSetResponse{}, nil
+}
+
+// Use this method to move a sticker in a set created by the bot to a specific position. Returns
+// True on success.
+func (a *TelegramApi) SetStickerPositionInSet(request *SetStickerPositionInSetRequest) (*SetStickerPositionInSetResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetStickerPositionInSet", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetStickerPositionInSetResponse{}, nil
+}
+
+// Use this method to delete a sticker from a set created by the bot. Returns True on success.
+func (a *TelegramApi) DeleteStickerFromSet(request *DeleteStickerFromSetRequest) (*DeleteStickerFromSetResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "DeleteStickerFromSet", request)
+	if err != nil {
+		return nil, err
+	}
+	return &DeleteStickerFromSetResponse{}, nil
+}
+
+// Use this method to change the list of emoji assigned to a regular or custom emoji sticker.
+// The sticker must belong to a sticker set created by the bot. Returns True on success.
+func (a *TelegramApi) SetStickerEmojiList(request *SetStickerEmojiListRequest) (*SetStickerEmojiListResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetStickerEmojiList", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetStickerEmojiListResponse{}, nil
+}
+
+// Use this method to change search keywords assigned to a regular or custom emoji sticker. The
+// sticker must belong to a sticker set created by the bot. Returns True on success.
+func (a *TelegramApi) SetStickerKeywords(request *SetStickerKeywordsRequest) (*SetStickerKeywordsResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetStickerKeywords", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetStickerKeywordsResponse{}, nil
+}
+
+// Use this method to change the mask position of a mask sticker. The sticker must belong to a
+// sticker set that was created by the bot. Returns True on success.
+func (a *TelegramApi) SetStickerMaskPosition(request *SetStickerMaskPositionRequest) (*SetStickerMaskPositionResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetStickerMaskPosition", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetStickerMaskPositionResponse{}, nil
+}
+
+// Use this method to set the title of a created sticker set. Returns True on success.
+func (a *TelegramApi) SetStickerSetTitle(request *SetStickerSetTitleRequest) (*SetStickerSetTitleResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetStickerSetTitle", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetStickerSetTitleResponse{}, nil
+}
+
+// Use this method to set the thumbnail of a regular or mask sticker set. The format of the
+// thumbnail file must match the format of the stickers in the set. Returns True on success.
+func (a *TelegramApi) SetStickerSetThumbnail(request *SetStickerSetThumbnailRequest) (*SetStickerSetThumbnailResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetStickerSetThumbnail", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetStickerSetThumbnailResponse{}, nil
+}
+
+// Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success.
+func (a *TelegramApi) SetCustomEmojiStickerSetThumbnail(request *SetCustomEmojiStickerSetThumbnailRequest) (*SetCustomEmojiStickerSetThumbnailResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetCustomEmojiStickerSetThumbnail", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetCustomEmojiStickerSetThumbnailResponse{}, nil
+}
+
+// Use this method to delete a sticker set that was created by the bot. Returns True on success.
+func (a *TelegramApi) DeleteStickerSet(request *DeleteStickerSetRequest) (*DeleteStickerSetResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "DeleteStickerSet", request)
+	if err != nil {
+		return nil, err
+	}
+	return &DeleteStickerSetResponse{}, nil
+}
+
+// Use this method to send answers to an inline query. On success, True is returned. No more
+// than 50 results per query are allowed.
+func (a *TelegramApi) AnswerInlineQuery(request *AnswerInlineQueryRequest) (*AnswerInlineQueryResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "AnswerInlineQuery", request)
+	if err != nil {
+		return nil, err
+	}
+	return &AnswerInlineQueryResponse{}, nil
+}
+
+// Note: It is necessary to enable inline feedback via @BotFather in order to receive these
+// objects in updates.   Use this method to set the result of an interaction with a Web App and
+// send a corresponding message on behalf of the user to the chat from which the query originated.
+// On success, a SentWebAppMessage object is returned.
+func (a *TelegramApi) AnswerWebAppQuery(request *AnswerWebAppQueryRequest) (*AnswerWebAppQueryResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*SentWebAppMessage](a.bot, "AnswerWebAppQuery", request)
+	if err != nil {
+		return nil, err
+	}
+	return &AnswerWebAppQueryResponse{Result: apiResponse.Result}, nil
+}
+
+// Your bot can accept payments from Telegram users. Please see the introduction to payments for
+// more details on the process and how to set up payments for your bot.   Use this method to send
+// invoices. On success, the sent Message is returned.
+func (a *TelegramApi) SendInvoice(request *SendInvoiceRequest) (*SendInvoiceResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendInvoice", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendInvoiceResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to create a link for an invoice. Returns the created invoice link as String
+// on success.
+func (a *TelegramApi) CreateInvoiceLink(request *CreateInvoiceLinkRequest) (*CreateInvoiceLinkResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "CreateInvoiceLink", request)
+	if err != nil {
+		return nil, err
+	}
+	return &CreateInvoiceLinkResponse{}, nil
+}
+
+// If you sent an invoice requesting a shipping address and the parameter is_flexible was
+// specified, the Bot API will send an Update with a shipping_query field to the bot. Use this
+// method to reply to shipping queries. On success, True is returned.
+func (a *TelegramApi) AnswerShippingQuery(request *AnswerShippingQueryRequest) (*AnswerShippingQueryResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "AnswerShippingQuery", request)
+	if err != nil {
+		return nil, err
+	}
+	return &AnswerShippingQueryResponse{}, nil
+}
+
+// Once the user has confirmed their payment and shipping details, the Bot API sends the final
+// confirmation in the form of an Update with the field pre_checkout_query . Use this method to
+// respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must
+// receive an answer within 10 seconds after the pre-checkout query was sent.
+func (a *TelegramApi) AnswerPreCheckoutQuery(request *AnswerPreCheckoutQueryRequest) (*AnswerPreCheckoutQueryResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "AnswerPreCheckoutQuery", request)
+	if err != nil {
+		return nil, err
+	}
+	return &AnswerPreCheckoutQueryResponse{}, nil
+}
+
+// Informs a user that some of the Telegram Passport elements they provided contains errors. The
+// user will not be able to re-submit their Passport to you until the errors are fixed (the
+// contents of the field for which you returned the error must change). Returns True on success.
+// Use this if the data submitted by the user doesn't satisfy the standards your service requires
+// for any reason. For example, if a birthday date seems invalid, a submitted document is blurry,
+// a scan shows evidence of tampering, etc. Supply some details in the error message to make sure
+// the user knows how to correct the issues.
+func (a *TelegramApi) SetPassportDataErrors(request *SetPassportDataErrorsRequest) (*SetPassportDataErrorsResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetPassportDataErrors", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetPassportDataErrorsResponse{}, nil
+}
+
+// Your bot can offer users HTML5 games to play solo or to compete against each other in groups
+// and one-on-one chats. Create games via @BotFather using the /newgame command. Please note that
+// this kind of power requires responsibility: you will need to accept the terms for each game
+// that your bots will be offering.   Games are a new type of content on Telegram, represented by
+// the Game and InlineQueryResultGame objects.  Once you've created a game via BotFather , you can
+// send games to chats as regular messages using the sendGame method, or use inline mode with
+// InlineQueryResultGame .  If you send the game message without any buttons, it will
+// automatically have a 'Play GameName ' button. When this button is pressed, your bot gets a
+// CallbackQuery with the game_short_name of the requested game. You provide the correct URL for
+// this particular user and the app opens the game in the in-app browser.  You can manually add
+// multiple buttons to your game message. Please note that the first button in the first row must
+// always launch the game, using the field callback_game in InlineKeyboardButton . You can add
+// extra buttons according to taste: e.g., for a description of the rules, or to open the game's
+// official community.  To make your game more attractive, you can upload a GIF animation that
+// demostrates the game to the users via BotFather (see Lumberjack for example).  A game message
+// will also display high scores for the current chat. Use setGameScore to post high scores to the
+// chat with the game, add the edit_message parameter to automatically update the message with the
+// current scoreboard.  Use getGameHighScores to get data for in-game high score tables.  You can
+// also add an extra sharing button for users to share their best score to different chats.  For
+// examples of what can be done using this new stuff, check the @gamebot and @gamee bots.    Use
+// this method to send a game. On success, the sent Message is returned.
+func (a *TelegramApi) SendGame(request *SendGameRequest) (*SendGameResponse, error) {
+	apiResponse, err := queryAndUnmarshal[*Message](a.bot, "SendGame", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SendGameResponse{Result: apiResponse.Result}, nil
+}
+
+// Use this method to set the score of the specified user in a game message. On success, if the
+// message is not an inline message, the Message is returned, otherwise True is returned. Returns
+// an error, if the new score is not greater than the user's current score in the chat and force
+// is False .
+func (a *TelegramApi) SetGameScore(request *SetGameScoreRequest) (*SetGameScoreResponse, error) {
+	_, err := queryAndUnmarshal[interface{}](a.bot, "SetGameScore", request)
+	if err != nil {
+		return nil, err
+	}
+	return &SetGameScoreResponse{}, nil
+}
+
+// Use this method to get data for high score tables. Will return the score of the specified
+// user and several of their neighbors in a game. Returns an Array of GameHighScore objects.
+// This method will currently return scores for the target user, plus two of their closest
+// neighbors on each side. Will also return the top three users if the user and their neighbors
+// are not among them. Please note that this behavior is subject to change.
+func (a *TelegramApi) GetGameHighScores(request *GetGameHighScoresRequest) (*GetGameHighScoresResponse, error) {
+	apiResponse, err := queryAndUnmarshal[[]*GameHighScore](a.bot, "GetGameHighScores", request)
+	if err != nil {
+		return nil, err
+	}
+	return &GetGameHighScoresResponse{Result: apiResponse.Result}, nil
 }

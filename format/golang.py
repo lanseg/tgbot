@@ -55,7 +55,7 @@ def toCamelCase(usstr: str, capFirst: str = True) -> str:
     return result
 
 
-def formatComment(comment: str, offset: int, maxWidth: int = 95) -> str:
+def formatComment(comment: str, offset: int = 0, maxWidth: int = 95) -> str:
     prefix = " " * offset + "// "
     currentLines = list(reversed(comment.split("\n")))
     commentLines = []
@@ -90,7 +90,7 @@ def formatStruct(token: api_parser.Token) -> str:
 
 
 def formatType(tgType: str) -> str:
-    if " or " in tgType:
+    if " or " in tgType and tgType not in PRIMITIVE_TYPES:
         return "interface{}"
     maybeArray = tgType.split("Array of ")
     tgType = PRIMITIVE_TYPES.get(maybeArray[-1], toCamelCase(maybeArray[-1]))
@@ -150,12 +150,33 @@ def formatRequestResponse(token: api_parser.Token, allTypes: dict[str, str]) -> 
     )
 
 
-def formatMethod(token: api_parser.Token) -> str:
+def formatMethod(token: api_parser.Token, allTypes: dict[str, str]) -> str:
     methodName = toCamelCase(token.name)
+    maybeReturnType = getResultType(token, allTypes)
+    if len(maybeReturnType) != 1:
+      return "\n".join(
+        [
+            formatComment(token.description),
+            f"func (a *TelegramApi) {methodName}(request *{methodName}Request) (*{methodName}Response, error) {{",
+            f"    _, err := queryAndUnmarshal[interface{{}}](a.bot, \"{methodName}\", request)",
+            "    if err != nil {",
+            "        return nil, err",
+            "    }",
+            f"    return &{methodName}Response {{ }}, nil",
+            "}"
+        ]
+    )
+
     return "\n".join(
         [
-            formatComment(token.description, 2),
-            f"  {methodName}(request *{methodName}Request) (*{methodName}Response, error)",
+            formatComment(token.description),
+            f"func (a *TelegramApi) {methodName}(request *{methodName}Request) (*{methodName}Response, error) {{",
+            f"    apiResponse, err := queryAndUnmarshal[{formatType(maybeReturnType[0])}](a.bot, \"{methodName}\", request)",
+            "    if err != nil {",
+            "        return nil, err",
+            "    }",
+            f"    return &{methodName}Response {{ Result: apiResponse.Result }}, nil",
+            "}"
         ]
     )
 
@@ -163,7 +184,10 @@ def formatMethod(token: api_parser.Token) -> str:
 def format(tokens: list[api_parser.Token]) -> str:
     tokenByName = {}
     structNames = {}
-    result = ["package tgbot"]
+    result = [
+    "// Telegram bot API classes and enpoint",
+    "package tgbot",
+    ]
     for t in tokens:
         tokenByName[t.name] = t
         if t.name[0].islower() or t.name in ONEOF_TYPES:
@@ -197,11 +221,17 @@ def format(tokens: list[api_parser.Token]) -> str:
         result.append("")
 
     result.append("// Bot interface")
-    result.append("type TelegramBotU interface {")
+    result.append("type TelegramApi struct {")
+    result.append("  bot TelegramBot")
+    result.append("}")
+    result.append("")
+    result.append("func NewTelegramApi (bot TelegramBot) *TelegramApi {")
+    result.append("    return &TelegramApi { bot: bot }")
+    result.append("}")
+    result.append("")
     for t in tokens:
         if t.name[0].isupper() or t.name in api_parser.SKIP_METHODS:
             continue
-        result.append(formatMethod(t))
+        result.append(formatMethod(t, structNames))
         result.append("")
-    result.append("}")
     return "\n".join(result)
