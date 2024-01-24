@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+find -iname '*go' -print -exec gofmt -s -w {} \;
+
 python_files="$( find -iname '*py' )"
 black $python_files
 pylint --argument-naming-style camelCase \

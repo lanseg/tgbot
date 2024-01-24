@@ -225,7 +225,9 @@ def formatTokens(tokens: list[api_parser.Token]) -> str:
         result.append(formatRequestResponse(tok, structNames))
         result.append("")
 
-    result.append(textwrap.dedent("""
+    result.append(
+        textwrap.dedent(
+            """
       // Bot interface
       type TelegramApi struct {
         bot TelegramBot
@@ -234,7 +236,9 @@ def formatTokens(tokens: list[api_parser.Token]) -> str:
       func NewTelegramApi (bot TelegramBot) *TelegramApi {
           return &TelegramApi { bot: bot }
       }
-      """))
+      """
+        )
+    )
     for tok in tokens:
         if tok.name[0].isupper() or tok.name in api_parser.SKIP_METHODS:
             continue
