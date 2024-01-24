@@ -19,7 +19,7 @@ type Response[T any] struct {
 }
 
 type TelegramBot interface {
-	query(methodName string, body interface{}) ([]byte, error)
+	Query(methodName string, body interface{}) ([]byte, error)
 }
 
 type TelegramBotImpl struct {
@@ -36,7 +36,7 @@ func NewBot(token string) TelegramBot {
 	}
 }
 
-func (b *TelegramBotImpl) query(apiMethod string, body interface{}) ([]byte, error) {
+func (b *TelegramBotImpl) Query(apiMethod string, body interface{}) ([]byte, error) {
 	jsonBody, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
@@ -60,7 +60,7 @@ func (b *TelegramBotImpl) query(apiMethod string, body interface{}) ([]byte, err
 }
 
 func queryAndUnmarshal[T any](b TelegramBot, apiMethod string, request interface{}) (*Response[T], error) {
-	resultBytes, err := b.query(apiMethod, request)
+	resultBytes, err := b.Query(apiMethod, request)
 	if err != nil {
 		return nil, err
 	}
