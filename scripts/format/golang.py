@@ -76,7 +76,7 @@ def formatStruct(token: api_parser.Token) -> str:
         result.extend(
             [
                 formatComment(param.description, 2),
-                f'  {toCamelCase(param.name)} {formatType(param.typeName)} `json:"{param.name}"`\n',
+                f'  {toCamelCase(param.name)} {formatType(param.typeName)} `json:"{param.name},omitempty"`\n',
             ]
         )
 
