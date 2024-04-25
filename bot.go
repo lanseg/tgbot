@@ -27,18 +27,25 @@ type TelegramBotImpl struct {
 	TelegramBot
 
 	httpClient *http.Client
+	server     string
 	token      string
 }
 
-func NewBot(token string) TelegramBot {
+func NewCustomBot(server string, token string) TelegramBot {
 	return &TelegramBotImpl{
 		token:      token,
+		server:     server,
 		httpClient: &http.Client{},
 	}
+
+}
+
+func NewBot(token string) TelegramBot {
+	return NewCustomBot("https://api.telegram.org", token)
 }
 
 func (b *TelegramBotImpl) ResolveUrl(filepath string) string {
-	return fmt.Sprintf("https://api.telegram.org/file/bot%s/%s", b.token, filepath)
+	return fmt.Sprintf("%s/file/bot%s/%s", b.server, b.token, filepath)
 }
 
 func (b *TelegramBotImpl) Query(apiMethod string, body interface{}) ([]byte, error) {
@@ -48,16 +55,16 @@ func (b *TelegramBotImpl) Query(apiMethod string, body interface{}) ([]byte, err
 	}
 
 	request, err := http.NewRequest("POST",
-		fmt.Sprintf("https://api.telegram.org/bot%s/%s", b.token, apiMethod),
+		fmt.Sprintf("%s/bot%s/%s", b.server, b.token, apiMethod),
 		bytes.NewBuffer(jsonBody))
 	if err != nil {
 		return nil, err
 	}
 	request.Header.Set("Content-Type", "application/json; charset=UTF-8")
 	resp, err := b.httpClient.Do(request)
-    if err != nil {
-        return nil, err
-    }
+	if err != nil {
+		return nil, err
+	}
 	defer resp.Body.Close()
 
 	buf := &bytes.Buffer{}
