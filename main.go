@@ -12,8 +12,14 @@ func main() {
 		fmt.Println("Usage: ./main <bot_api_key>")
 		os.Exit(1)
 	}
-	apiKey := os.Args[1]
-	api := tgbot.NewTelegramApi(tgbot.NewBot(apiKey))
+
+	bot, err := tgbot.NewBot(os.Args[1])
+	if err != nil {
+		fmt.Printf("Error while creating bot: %s\n", err)
+		os.Exit(1)
+	}
+
+	api := tgbot.NewTelegramApi(bot)
 	result, err := api.GetUpdates(&tgbot.GetUpdatesRequest{
 		Timeout: 60, // 60 Seconds
 	})

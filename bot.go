@@ -2,11 +2,11 @@ package tgbot
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
-
-	"encoding/json"
 	"net/http"
+	"net/url"
 )
 
 type Response[T any] struct {
@@ -20,32 +20,36 @@ type Response[T any] struct {
 
 type TelegramBot interface {
 	Query(methodName string, body interface{}) ([]byte, error)
-	ResolveUrl(filepath string) string
+	ResolveFileUrl(filename string) *url.URL
 }
 
 type TelegramBotImpl struct {
 	TelegramBot
 
 	httpClient *http.Client
-	server     string
+	server     *url.URL
 	token      string
 }
 
-func NewCustomBot(server string, token string) TelegramBot {
+func NewCustomBot(server string, token string) (TelegramBot, error) {
+	url, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
 	return &TelegramBotImpl{
 		token:      token,
-		server:     server,
+		server:     url,
 		httpClient: &http.Client{},
-	}
+	}, nil
 
 }
 
-func NewBot(token string) TelegramBot {
+func NewBot(token string) (TelegramBot, error) {
 	return NewCustomBot("https://api.telegram.org", token)
 }
 
-func (b *TelegramBotImpl) ResolveUrl(filepath string) string {
-	return fmt.Sprintf("%s/file/bot%s/%s", b.server, b.token, filepath)
+func (b *TelegramBotImpl) ResolveFileUrl(filename string) *url.URL {
+	return b.server.JoinPath("file", "bot"+b.token, filename)
 }
 
 func (b *TelegramBotImpl) Query(apiMethod string, body interface{}) ([]byte, error) {
@@ -54,9 +58,8 @@ func (b *TelegramBotImpl) Query(apiMethod string, body interface{}) ([]byte, err
 		return nil, err
 	}
 
-	request, err := http.NewRequest("POST",
-		fmt.Sprintf("%s/bot%s/%s", b.server, b.token, apiMethod),
-		bytes.NewBuffer(jsonBody))
+	methodURL := b.server.JoinPath("bot"+b.token, apiMethod)
+	request, err := http.NewRequest("POST", methodURL.String(), bytes.NewBuffer(jsonBody))
 	if err != nil {
 		return nil, err
 	}
