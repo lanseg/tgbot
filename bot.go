@@ -55,6 +55,9 @@ func (b *TelegramBotImpl) Query(apiMethod string, body interface{}) ([]byte, err
 	}
 	request.Header.Set("Content-Type", "application/json; charset=UTF-8")
 	resp, err := b.httpClient.Do(request)
+    if err != nil {
+        return nil, err
+    }
 	defer resp.Body.Close()
 
 	buf := &bytes.Buffer{}
