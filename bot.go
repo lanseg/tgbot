@@ -20,7 +20,6 @@ type Response[T any] struct {
 
 type TelegramBot interface {
 	Query(methodName string, body interface{}) ([]byte, error)
-	ResolveFileUrl(filename string) *url.URL
 }
 
 type TelegramBotImpl struct {
@@ -46,11 +45,6 @@ func NewCustomBot(server string, token string) (TelegramBot, error) {
 
 func NewBot(token string) (TelegramBot, error) {
 	return NewCustomBot("https://api.telegram.org", token)
-}
-
-func (b *TelegramBotImpl) ResolveFileUrl(filename string) *url.URL {
-	url, _ := url.Parse(fmt.Sprintf("file/bot%s/%s", b.token, filename))
-	return url
 }
 
 func (b *TelegramBotImpl) Query(apiMethod string, body interface{}) ([]byte, error) {
