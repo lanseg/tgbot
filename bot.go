@@ -49,7 +49,8 @@ func NewBot(token string) (TelegramBot, error) {
 }
 
 func (b *TelegramBotImpl) ResolveFileUrl(filename string) *url.URL {
-	return b.server.JoinPath("file", "bot"+b.token, filename)
+	url, _ := url.Parse(fmt.Sprintf("file/bot%s/%s", b.token, filename))
+	return url
 }
 
 func (b *TelegramBotImpl) Query(apiMethod string, body interface{}) ([]byte, error) {
